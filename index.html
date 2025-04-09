@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamhanga Premium Group 2024/2025</title>
+    <title>Kamhanga advanced Group 2024/2025</title>
     <style>
         :root {
             --primary: #3498db;
@@ -422,7 +422,7 @@ transform: translate(-50%, -50% ) ;
                 <li onclick="openTab('membersListAlpha')"><span class="icon">📋</span>Majina ya wanachama wote</li>
                 <li onclick="openTab('print')"><span class="icon">🖨️</span>Chapisha</li>
                 <li onclick="openTab('comments')"><span class="icon">💬</span>Maoni</li>
-                <li onclick="openTab('admin')"><span class="icon">🔒</span>kwa matumizi ya viongozi tu</li>
+                <li onclick="openTab('admin')"><span class="icon">🔒</span>matumizi ya viongozi </li>
             </ul>
         </div>
 
@@ -756,7 +756,7 @@ transform: translate(-50%, -50% ) ;
             console.log('Saving payment:', JSON.stringify(data));
             database.ref('payments').push(data)
                 .then(() => {
-                    showModal('Malipo', 'Malipo yamepokelewa! Yanangoja uthibitisho.', 'success');
+                    showModal('Malipo', 'Malipo yamepokelewa! Yanangoja uthibitisho wa faraja herman.', 'success');
                     document.getElementById('paymentForm').reset();
                     loadPendingPayments();
                 })
