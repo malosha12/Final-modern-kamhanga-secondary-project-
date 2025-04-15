@@ -33,7 +33,7 @@
         #loadingScreen {
             position: fixed;
             top: 0;
-            left:0;
+            left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #1e90ff, #ff00cc);
@@ -41,38 +41,76 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            overflow: hidden;
+        }
+
+        .rainfall {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="transparent"/><line x1="0" y1="0" x2="0" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="1"/></svg>');
+            animation: rainfall 0.5s linear infinite;
+        }
+
+        @keyframes rainfall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
         }
 
         .spinner {
-            width: 60px;
-            height: 60px;
-            border: 8px solid rgba(255, 255, 255, 0.2);
-            border-top: 8px solid #fff;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(255, 255, 255, 0.2);
+            border-top: 10px solid #fff;
             border-radius: 50%;
-            animation: spin 1.5s infinite ease-in-out, colorChange 3s infinite;
+            animation: spin 1s linear infinite, glow 2s ease-in-out infinite;
             position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50% ) ;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        @keyframes colorChange {
-            0% { border-top-color: #fff; }
-            33% { border-top-color: #ff00cc; }
-            66% { border-top-color: #1e90ff; }
-            100% { border-top-color: #fff; }
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+            100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
         }
 
         .loading-text {
             color: white;
-            font-size: 24px;
-            margin-top: 20px;
+            font-size: 28px;
+            text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in-out;
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Update 3: Moving icon for loading screen */
+        .group-icon {
+            position: absolute;
+            font-size: 50px;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounceGroup 1.5s infinite;
+        }
+
+        @keyframes bounceGroup {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -20px); }
         }
 
         .container {
@@ -358,6 +396,20 @@ transform: translate(-50%, -50% ) ;
             margin-top: 20px;
         }
 
+        /* Update 1: Animated colors for Powered by Malosha */
+        .powered-by {
+            display: inline-block;
+            animation: colorChange 6s infinite;
+            font-weight: bold;
+        }
+
+        @keyframes colorChange {
+            0% { color: #3498db; }
+            33% { color: #2ecc71; }
+            66% { color: #9b59b6; }
+            100% { color: #3498db; }
+        }
+
         .table {
             width: 100%;
             border-collapse: collapse;
@@ -376,26 +428,137 @@ transform: translate(-50%, -50% ) ;
             color: white;
         }
 
+        .constitution-content {
+            line-height: 1.8;
+            padding: 15px;
+        }
+
+        .constitution-content h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .constitution-content h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin: 20px 0 10px;
+        }
+
+        .constitution-content h3 {
+            font-size: 18px;
+            margin: 15px 0 10px;
+        }
+
+        .constitution-content p, .constitution-content li {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .constitution-content ul, .constitution-content ol {
+            margin-left: 20px;
+        }
+
+        /* Update 5: Leaders styling */
+        .leader-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .leader-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .leader-icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .leader-name {
+            font-weight: bold;
+        }
+
+        .leader-position {
+            font-style: italic;
+            color: #f1c40f;
+        }
+
+        /* Update 6 & 7: Emergency contribution form styling */
+        .emergency-form input,
+        .emergency-form select {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .emergency-history {
+            margin-top: 20px;
+        }
+
+        .emergency-history h4 {
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .emergency-history ul {
+            list-style: none;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .emergency-history li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
         @media (min-width: 768px) {
             .container { max-width: 1200px; margin: 0 auto; }
             .nav-menu li { flex: 1 1 auto; }
             .form-group input, .form-group select, .modern-select { max-width: 500px; }
+            .constitution-content { max-width: 800px; margin: 0 auto; }
+            .constitution-content h1 { font-size: 28px; }
+            .constitution-content h2 { font-size: 22px; }
+            .constitution-content h3 { font-size: 20px; }
         }
 
         @media (max-width: 767px) {
             .nav-menu ul { flex-direction: column; }
             .header h1 { font-size: 22px; }
-            .loading-text { font-size: 18px; }
+            .loading-text { font-size: 20px; }
             .btn { width: 100%; }
+            .spinner { width: 60px; height: 60px; border-width: 8px; }
+            .constitution-content h1 { font-size: 20px; }
+            .constitution-content h2 { font-size: 18px; }
+            .constitution-content h3 { font-size: 16px; }
+            .constitution-content p, .constitution-content li { font-size: 14px; }
+            .leader-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .leader-icon {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="loadingScreen">
-        <div>
-            <div class="spinner"></div>
-            <div class="loading-text">Please wait.....<br></div>
-        </div>
+        <div class="rainfall"></div>
+        <div class="spinner"></div>
+        <div class="group-icon">🌍</div>
+        <div class="loading-text">KAMHANGA GROUP <br> your warmly welcome</div>
     </div>
 
     <div class="container">
@@ -411,17 +574,20 @@ transform: translate(-50%, -50% ) ;
 
         <div class="nav-menu">
             <ul>
-                <li class="active" onclick="openTab('home')"><span class="icon">🏠</span>Nyumbani</li>
+                <li class="active" onclick="openTab('home')"><span class="icon">🏠</span>NYUMBANI</li>
                 <li onclick="openTab('register')"><span class="icon">👤</span>Usajiri wa wanachama wapya</li>
                 <li onclick="openTab('payment')"><span class="icon">💰</span>Fanya Malipo yote hapa</li>
                 <li onclick="openTab('debtors')"><span class="icon">📉</span>Hali ya Malipo ya ada</li>
-                <li onclick="openTab('contributions')"><span class="icon">🤝</span> hali ya kila michango  Michango yote</li>
+                <li onclick="openTab('contributions')"><span class="icon">🤝</span> hali ya Michango yote</li>
+                <li id="nonContributorsTab" onclick="openTab('nonContributors')"><span class="icon">🚫</span>Wasiotoa michango kabisa</li>
                 <li onclick="openTab('finance')"><span class="icon">📊</span>Mapato na Matumizi</li>
                 <li onclick="openTab('personal')"><span class="icon">🧑</span>Taarifa Binafsi za kila mwanachama</li>
-                <li onclick="openTab('constitution')"><span class="icon">📜</span>Katiba na sheria za kundi</li>
+                <li onclick="openTab('constitution')"><span class="icon">📚</span>KATIBA NA SHERIA ZA KUNDI </li>
                 <li onclick="openTab('membersListAlpha')"><span class="icon">📋</span>Majina ya wanachama wote</li>
                 <li onclick="openTab('print')"><span class="icon">🖨️</span>Chapisha</li>
                 <li onclick="openTab('comments')"><span class="icon">💬</span>Maoni</li>
+                <li onclick="openTab('leaders')"><span class="icon">👑</span> Majina ya Viongozi</li>
+                <li onclick="openTab('emergency')"><span class="icon">🚨</span>MICHANGO YA DHARURA 🚨</li>
                 <li onclick="openTab('admin')"><span class="icon">🔒</span>matumizi ya viongozi tu </li>
             </ul>
         </div>
@@ -540,21 +706,30 @@ transform: translate(-50%, -50% ) ;
             </div>
         </div>
 
+        <div id="nonContributors" class="tab-content">
+            <div class="card">
+                <h2>Wanachama Wasiotoa Michango</h2>
+                <div id="nonContributorsList"></div>
+            </div>
+        </div>
+
         <div id="finance" class="tab-content">
             <div class="card">
                 <h2>Mapato/Matumizi</h2>
                 <div class="form-group">
                     <label>Andika Mapato</label>
                     <input type="number" id="incomeAmount" placeholder="Kiasi (TSh)">
+                    <input type="text" id="incomeDesc" placeholder="Maelezo ya Mapato">
                     <button class="btn btn-primary" onclick="addIncome()">Ongeza</button>
                 </div>
                 <div class="form-group">
                     <label>Andika Matumizi</label>
                     <input type="number" id="expenseAmount" placeholder="Kiasi (TSh)">
-                    <input type="text" id="expenseDesc" placeholder="Maelezo">
+                    <input type="text" id="expenseDesc" placeholder="Maelezo ya Matumizi">
                     <button class="btn btn-danger" onclick="addExpense()">Ongeza</button>
                 </div>
                 <div id="financeSummary"></div>
+                <div id="financeHistory"></div>
                 <button class="btn btn-primary" onclick="generateFinanceReport('week')">Ripoti ya Wiki (PDF)</button>
                 <button class="btn btn-primary" onclick="generateFinanceReport('month')">Ripoti ya Mwezi (PDF)</button>
                 <button class="btn btn-primary" onclick="generateFinanceReport('year')">Ripoti ya Mwaka (PDF)</button>
@@ -576,7 +751,200 @@ transform: translate(-50%, -50% ) ;
         <div id="constitution" class="tab-content">
             <div class="card">
                 <h2>Katiba Yetu</h2>
-                <div id="constitutionContent"></div>
+                <div class="constitution-content">
+                    <h1>KATIBA YA GROUP LA KAMHANGA SECONDARY 2014-2018</h1>
+                    <h2>UTANGULIZI</h2>
+                    <p>Kundi hili limeanzishwa kwa lengo la kukuza umoja, mshikamano, na ushirikiano kati ya wanachama waliowahi kusoma Shule ya Sekondari Kamhanga. Katiba hii inalenga kuweka mwongozo wa shughuli za kundi, maadili, majukumu, na taratibu za utekelezaji ili kuhakikisha maendeleo ya pamoja.</p>
+                    
+                    <h2>SURA YA KWANZA: KANUNI ZA MSINGI</h2>
+                    <h3>Ibara ya 1: Jina na Lengo la Kundi</h3>
+                    <ol>
+                        <li>Jina la kundi litakuwa KAMHANGA ADVANCED GROUP.</li>
+                        <li>Malengo ya kundi ni:
+                            <ul>
+                                <li>Kudumisha umoja na mshikamano kati ya wanachama.</li>
+                                <li>Kuhimiza upendo na ushirikiano katika shida na raha.</li>
+                                <li>Kuwezesha maendeleo ya pamoja kupitia miradi na michango.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h3>Ibara ya 2: Sifa za Mwanachama</h3>
+                    <ol>
+                        <li>Mwanachama ni yule ambaye:
+                            <ul>
+                                <li>Amewahi kusoma Shule ya Sekondari Kamhanga.</li>
+                                <li>Ana umri wa kuanzia miaka 18 na kuendelea.</li>
+                                <li>Amejitambulisha kwa majina mawili na picha moja kwa wanachama wengine.</li>
+                                <li>Amekubali kushiriki kikamilifu katika shughuli za kundi na kufuata katiba hii.</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h2>SURA YA PILI: MAJUKUMU NA MAADILI</h2>
+                    <h3>Ibara ya 3: Majukumu ya Mwanachama</h3>
+                    <ol>
+                        <li>Mwanachama atalazimika:
+                            <ul>
+                                <li>Kushiriki kikamilifu katika mijadala, vikao, na shughuli za kundi.</li>
+                                <li>Kutoa mchango wa wiki (TSh 500) au mwezi (TSh 1,000) kulingana na makubaliano ya kundi.</li>
+                                <li>Kuhudhuria vikao vya kundi angalau mara moja kwa wiki au kila baada ya miezi 3 kulingana na ratiba rasmi.</li>
+                                <li>Kutoa taarifa mapema ikiwa hataweza kushiriki au kuhudhuria vikao.</li>
+                            </ul>
+                        </li>
+                        <li>Mwanachama atawajibika kushiriki michango ya shida (msiba, ugonjwa) na raha (harusi, send-off) kulingana na taratibu za kundi.</li>
+                    </ol>
+
+                    <h3>Ibara ya 4: Maadili ya Kundi</h3>
+                    <ol>
+                        <li>Wanachama watalazimika kuheshimu maadili yafuatayo:
+                            <ul>
+                                <li>Kuheshimiana na kuepuka matusi, kejeli, au lugha chafu.</li>
+                                <li>Kukataza majungu, fitina, unafiki, na husuda.</li>
+                                <li>Kukataza picha, video, au audio za utupu au zenye uchochezi.</li>
+                            </ul>
+                        </li>
+                        <li>Mwanachama yeyote atakayekiuka maadili haya atachukuliwa hatua za kinidhamu kulingana na ibara ya adhabu.</li>
+                    </ol>
+
+                    <h2>SURA YA TATU: MFUKO WA KUNDI</h2>
+                    <h3>Ibara ya 5: Michango ya Kundi</h3>
+                    <ol>
+                        <li>Kiingilio: Kila mwanachama mpya atalipa TSh 10,000 kama ada ya kujiunga.</li>
+                        <li>Michango ya ada:
+                            <ul>
+                                <li>Mchango wa wiki: TSh 500 kwa kila mwanachama.</li>
+                                <li>Mchango wa mwezi: TSh 2,000 kwa kila mwanachama (kama ada ya mwezi mzima lakini kama utatoa 500 kila wiki, ada ya mwezi 2,000 hutadaiwa).</li>
+                                <li>Mchango wa Shughuli za Msiba au Furaha: TSh 3,000 kwa kila tukio, kulipwa ndani ya siku 10.</li>
+                            </ul>
+                        </li>
+                        <li>Michango yote itawekwa kwenye akaunti rasmi ya kundi:
+                            <ul>
+                                <li>Benki: CRDB</li>
+                                <li>Namba ya Akaunti: 01520007NBV00</li>
+                                <li>Jina: Faraja Herman</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>Ibara ya 6: Matumizi ya Mfuko</h3>
+                    <ol>
+                        <li>Mfuko utatumika kwa:
+                            <ul>
+                                <li>Kusaidiana katika misiba, harusi, ugonjwa, na sherehe za wanachama.</li>
+                                <li>Kuwezesha miradi ya pamoja kwa maendeleo ya kundi.</li>
+                                <li>Kuweka akiba kwa ajili ya mahitaji ya dharura au ya muda mrefu.</li>
+                            </ul>
+                        </li>
+                        <li>Mwanachama ambaye hajatoa mchango wowote au ana deni la mchango hatahitajika kusaidiwa na kundi katika shida yake.</li>
+                    </ol>
+
+                    <h3>Ibara ya 7: Haki za Mchango</h3>
+                    <ol>
+                        <li>Mwanachama mpya atakuwa halali kupokea mchango wa msiba mara moja baada ya kulipa kiingilio na kushiriki michango ya msingi.</li>
+                        <li>Mchango wa furaha (harusi, send-off) utatolewa kwa mwanachama baada ya kuwa mwanachama kwa angalau miezi 4 na kushiriki michango yote.</li>
+                        <li>Mchango utahusu:
+                            <ul>
+                                <li>Mwanachama mwenyewe.</li>
+                                <li>Baba/Mama.</li>
+                                <li>Mke/Mume.</li>
+                                <li>Watoto.</li>
+                                <li>Matukio ya harusi au send-off.</li>
+                                <li>Ugonjwa unaohitaji msaada wa kundi.</li>
+                            </ul>
+                        </li>
+                        <li>Wanachama wa familia moja watapokea mchango sawa na mwanachama mwingine yeyote.</li>
+                    </ol>
+
+                    <h2>SURA YA NNE: UONGOZI NA UCHAGUZI</h2>
+                    <h3>Ibara ya 8: Muundo wa Uongozi</h3>
+                    <ol>
+                        <li>Kundi litakuwa na viongozi wafuatao:
+                            <ul>
+                                <li>Mwenyekiti</li>
+                                <li>Katibu</li>
+                                <li>Mhazini</li>
+                            </ul>
+                        </li>
+                        <li>Viongozi watachaguliwa kila baada ya mwaka mmoja kupitia uchaguzi huru na wa haki.</li>
+                        <li>Kila mwanachama ana haki ya kugombea nafasi yoyote ya uongozi bila kujali jinsia.</li>
+                        <li>Viongozi watachaguliwa kwa kuzingatia:
+                            <ul>
+                                <li>Uaminifu na uadilifu.</li>
+                                <li>Uwezo wa kusimamia shughuli za kundi.</li>
+                                <li>Maoni ya wanachama wengi.</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>Ibara ya 9: Majukumu ya Uongozi</h3>
+                    <ol>
+                        <li>Mwenyekiti: Kusimamia vikao na shughuli za kundi.</li>
+                        <li>Katibu: Kuweka kumbukumbu za kundi na kuratibu mawasiliano.</li>
+                        <li>Mhazini: Kusimamia fedha za kundi na kutoa ripoti za matumizi.</li>
+                    </ol>
+
+                    <h2>SURA YA TANO: VIKAO NA SHUGHULI ZA KUNDI</h2>
+                    <h3>Ibara ya 10: Vikao vya Kundi</h3>
+                    <ol>
+                        <li>Kundi litafanya kikao cha kila wiki au kila baada ya miezi 1 kulingana na ratiba iliyopangwa.</li>
+                        <li>Vikao vitajadili masuala ya maendeleo, mipango ya kifedha, na miradi ya kundi.</li>
+                        <li>Mwanachama asiyehudhuria vikao viwili mfululizo bila sababu za msingi atawajibika kwa adhabu.</li>
+                    </ol>
+
+                    <h3>Ibara ya 11: Shughuli za Pamoja</h3>
+                    <ol>
+                        <li>Kundi litapanga sherehe ya kila mwaka kwa ajili ya kukutana na kusherehekea mafanikio.</li>
+                        <li>Miradi ya pamoja itaanzishwa ili kuimarisha uwezo wa kifedha wa wanachama.</li>
+                    </ol>
+
+                    <h2>SURA YA SITA: ADHABU NA UTEKELEZAJI</h2>
+                    <h3>Ibara ya 12: Adhabu za Kinidhamu</h3>
+                    <ol>
+                        <li>Kushindwa Kutoa Mchango:
+                            <ul>
+                                <li>Faini ya TSh 1,000 kwa kushindwa kutoa mchango wa wiki/mwezi.</li>
+                                <li>Ikiendelea kwa wiki mbili/miezi miwili: Sasipensheni au kuondolewa kwenye kundi.</li>
+                            </ul>
+                        </li>
+                        <li>Kushindwa Kuhudhuria Vikao:
+                            <ul>
+                                <li>Faini ya TSh 500 kwa kila kikao kilichokosekana.</li>
+                                <li>Vikao viwili mfululizo: Faini ya TSh 1,000 pamoja na sasipensheni.</li>
+                            </ul>
+                        </li>
+                        <li>Kukiuka Maadili ya Kundi:
+                            <ul>
+                                <li>Faini ya TSh 2,000 kwa matumizi ya lugha mbaya, kashfa, au tabia zisizofaa.</li>
+                                <li>Kurudia mara kwa mara: Sasipensheni au kuondolewa kabisa.</li>
+                            </ul>
+                        </li>
+                        <li>Kupuuza Mawasiliano ya Kundi:
+                            <ul>
+                                <li>Faini ya TSh 1,000 kwa kushindwa kujibu ujumbe muhimu.</li>
+                                <li>Kurudia: Sasipensheni au kuondolewa.</li>
+                            </ul>
+                        </li>
+                        <li>Mwanachama aliyeondolewa au kujiondoa hatatarajiwa kurudishiwa michango yoyote.</li>
+                    </ol>
+
+                    <h3>Ibara ya 13: Ushirikiano Katika Shida</h3>
+                    <ol>
+                        <li>Mwanachama anayehitaji msaada wa kundi atawajibika kufuata taratibu za uongozi.</li>
+                        <li>Mwanachama asiyeshiriki michango yoyote hatahitajika kusaidiwa na kundi.</li>
+                    </ol>
+
+                    <h2>SURA YA SABA: MABADILIKO YA KATIBA</h2>
+                    <h3>Ibara ya 14: Utaratibu wa Marekebisho</h3>
+                    <ol>
+                        <li>Katiba hii inaweza kurekebishwa kulingana na maoni ya wanachama wote.</li>
+                        <li>Mapendekezo ya marekebisho yatapitiwa na kupitishwa katika kikao rasmi cha kundi.</li>
+                        <li>Marekebisho yoyote yatatangazwa rasmi kwa wanachama wote.</li>
+                    </ol>
+
+                    <p><strong>Imetolewa na:</strong> FARAJA HERMAN<br>
+                    <strong>Tarehe:</strong> 13 Aprili 2025</p>
+                </div>
             </div>
         </div>
 
@@ -600,6 +968,7 @@ transform: translate(-50%, -50% ) ;
                 <button class="btn btn-primary" onclick="printDebtors()">Chapisha Hali ya Malipo</button>
                 <button class="btn btn-primary" onclick="printContributions()">Chapisha Michango</button>
                 <button class="btn btn-primary" onclick="printFinance()">Chapisha Mapato/Matumizi</button>
+                <button class="btn btn-primary" onclick="printNonContributors()">Chapisha Wasiotoa Michango</button>
             </div>
         </div>
 
@@ -621,9 +990,42 @@ transform: translate(-50%, -50% ) ;
             </div>
         </div>
 
+        <div id="leaders" class="tab-content">
+           <div class="card">
+                <h2>Viongozi</h2>
+                <div id="leadersList"></div>
+            </div>
+        </div>
+
+        <div id="emergency" class="tab-content">
+            <div class="card">
+                <h2>Michango ya Dharura</h2>
+                <div id="emergencyFormSection">
+                    <form id="emergencyForm" class="emergency-form">
+                        <div class="form-group">
+                            <label>Jina la Mwanachama</label>
+                            <select id="emergencyMember" required>
+                                <option value="">Chagua Mwanachama</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Kiasi (TSh)</label>
+                            <input type="number" id="emergencyAmount" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Maelezo (Pesa ya Nini)</label>
+                            <input type="text" id="emergencyPurpose" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Tuma Mchango</button>
+                    </form>
+                </div>
+                <div id="emergencyHistory" class="emergency-history"></div>
+            </div>
+        </div>
+
         <div id="admin" class="tab-content">
             <div class="card">
-                <h2>Admin Panel</h2>
+                <h2>VIONGOZI PANEL</h2>
                 <div id="adminLoginForm">
                     <div class="form-group">
                         <label>Neno la Siri</label>
@@ -644,10 +1046,28 @@ transform: translate(-50%, -50% ) ;
                     </div>
                     <div id="announcementsList"></div>
                     <div class="form-group">
-                        <label>Badilisha Katiba</label>
-                        <input type="text" id="constitutionText">
-                        <button class="btn btn-primary" onclick="updateConstitution()">Hifadhi</button>
+                        <label>Jina la Kiongozi</label>
+                        <input type="text" id="leaderName">
                     </div>
+                    <div class="form-group">
+                        <label>Cheo</label>
+                        <input type="text" id="leaderPosition">
+                    </div>
+                    <button class="btn btn-primary" onclick="addLeader()">Ongeza Kiongozi</button>
+                    <div class="form-group">
+                        <label>Ficha/Onyesha Wasiotoa Michango</label>
+                        <button class="btn btn-primary" onclick="toggleNonContributors()">Ficha/Onyesha</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Jina la Mchango wa Dharura</label>
+                        <input type="text" id="emergencyName">
+                    </div>
+                    <div class="form-group">
+                        <label>Tarehe ya Mwisho</label>
+                        <input type="datetime-local" id="emergencyDeadline">
+                    </div>
+                    <button class="btn btn-primary" onclick="setEmergencyDeadline()">Weka Muda</button>
+                    <button class="btn btn-primary" onclick="extendEmergencyDeadline()">Ongeza Muda</button>
                     <div class="form-group">
                         <label>Badilisha Neno la Siri</label>
                         <input type="password" id="newAdminPassword">
@@ -659,6 +1079,7 @@ transform: translate(-50%, -50% ) ;
 
         <div class="footer">
             <span class="powered-by">POWERED BY MALOSHA</span>
+            <div id="dailyUsers">Waliotembelea mfumo leo: <span id="userCount">0</span></div>
         </div>
     </div>
 
@@ -744,6 +1165,8 @@ transform: translate(-50%, -50% ) ;
                             document.getElementById('registrationForm').reset();
                             loadMembers();
                             loadMembersAlphabetically();
+                            loadNonContributors();
+                            loadEmergencyMembers();
                         });
                 })
                 .catch(err => {
@@ -759,10 +1182,25 @@ transform: translate(-50%, -50% ) ;
                     showModal('Malipo', 'Malipo yamepokelewa! Yanangoja uthibitisho wa faraja herman.', 'success');
                     document.getElementById('paymentForm').reset();
                     loadPendingPayments();
+                    loadNonContributors();
+                    checkEntryFeeDebt(data.paymentPhone);
                 })
                 .catch(err => {
                     console.error('Payment Error:', err);
                     showModal('Hitilafu', 'Tatizo la malipo: ' + err.message, 'error');
+                });
+        }
+
+        function checkEntryFeeDebt(phone) {
+            database.ref('payments').orderByChild('paymentPhone').equalTo(phone).once('value')
+                .then(snap => {
+                    const payments = snap.val() || {};
+                    const entryPayments = Object.values(payments).filter(p => p.paymentType === 'Hela ya Kiingilio' && p.status === 'confirmed');
+                    const totalEntryPaid = entryPayments.reduce((sum, p) => sum + Number(p.paymentAmount), 0);
+                    if (totalEntryPaid < ENTRY_FEE && totalEntryPaid > 0) {
+                        const debt = ENTRY_FEE - totalEntryPaid;
+                        showModal('Deni', `Unadaiwa TSh ${debt} ili kukamilisha hela ya kiingilio ya TSh ${ENTRY_FEE}.`, 'info');
+                    }
                 });
         }
 
@@ -784,8 +1222,23 @@ transform: translate(-50%, -50% ) ;
                     document.getElementById('paymentMember').innerHTML = defaultOption + options;
                     document.getElementById('personalMember').innerHTML = defaultOption + options;
                     document.getElementById('printPersonalMember').innerHTML = defaultOption + options;
+                    loadEmergencyMembers();
                 })
                 .catch(err => console.error('Load Members Error:', err));
+        }
+
+        function loadEmergencyMembers() {
+            database.ref('members').once('value')
+                .then(snap => {
+                    const members = snap.val() || {};
+                    const options = Object.values(members)
+                        .filter(m => m.phone && m.fullName)
+                        .map(m => `<option value="${m.phone}">${m.fullName}</option>`)
+                        .join('');
+                    const defaultOption = '<option value="">Chagua Mwanachama</option>';
+                    document.getElementById('emergencyMember').innerHTML = defaultOption + options;
+                })
+                .catch(err => console.error('Load Emergency Members Error:', err));
         }
 
         function loadMembersAlphabetically() {
@@ -851,6 +1304,29 @@ transform: translate(-50%, -50% ) ;
                 .catch(err => console.error('Load Contributions Error:', err));
         }
 
+        function loadNonContributors() {
+            Promise.all([
+                database.ref('members').once('value'),
+                database.ref('payments').once('value')
+            ])
+                .then(([membersSnap, paymentsSnap]) => {
+                    const members = membersSnap.val() || {};
+                    const payments = paymentsSnap.val() || {};
+                    const paidPhones = new Set(Object.values(payments).filter(p => p.status === 'confirmed').map(p => p.paymentPhone));
+                    let nonContributors = '';
+                    Object.values(members).forEach(m => {
+                        if (!paidPhones.has(m.phone)) {
+                            nonContributors += `<li>${m.fullName} - ${m.phone}</li>`;
+                        }
+                    });
+                    document.getElementById('nonContributorsList').innerHTML = `<ul>${nonContributors || '<li>Hakuna wanachama wasiotoa michango</li>'}</ul>`;
+                })
+                .catch(err => {
+                    console.error('Load Non-Contributors Error:', err);
+                    document.getElementById('nonContributorsList').innerHTML = '<p>Hakuna data au hitilafu imetokea.</p>';
+                });
+        }
+
         function loadPersonalReport() {
             const phone = document.getElementById('personalMember').value;
             if (!phone) return showModal('Hitilafu', 'Chagua mwanachama kwanza!', 'error');
@@ -869,7 +1345,8 @@ transform: translate(-50%, -50% ) ;
                     report += '</ul>';
 
                     const paidMonths = new Set(confirmedPayments.filter(p => p.paymentType === 'Ada').map(p => p.paymentMonth));
-                    const paidEntryFee = confirmedPayments.some(p => p.paymentType === 'Hela ya Kiingilio');
+                    const entryPayments = confirmedPayments.filter(p => p.paymentType === 'Hela ya Kiingilio');
+                    const totalEntryPaid = entryPayments.reduce((sum, p) => sum + Number(p.paymentAmount), 0);
                     let debt = 0;
                     let pending = '<h4>Michango Inayodaiwa</h4><ul>';
                     for (let i = 0; i <= CURRENT_MONTH_INDEX; i++) {
@@ -878,9 +1355,10 @@ transform: translate(-50%, -50% ) ;
                             debt += MONTHLY_FEE;
                         }
                     }
-                    if (!paidEntryFee) {
-                        pending += `<li>Hela ya Kiingilio - TSh ${ENTRY_FEE}</li>`;
-                        debt += ENTRY_FEE;
+                    if (totalEntryPaid < ENTRY_FEE) {
+                       const entryDebt = ENTRY_FEE - totalEntryPaid;
+                        pending += `<li>Hela ya Kiingilio - TSh ${entryDebt}</li>`;
+                        debt += entryDebt;
                     }
                     pending += '</ul>';
                     report += pending + `<p><strong>Jumla ya Madeni: TSh ${debt}</strong></p>`;
@@ -891,10 +1369,18 @@ transform: translate(-50%, -50% ) ;
 
         function addIncome() {
             const amount = document.getElementById('incomeAmount').value;
-            if (!amount) return showModal('Hitilafu', 'Ingiza kiasi cha mapato!', 'error');
-            database.ref('income').push({ amount: Number(amount), timestamp: Date.now(), source: 'Manual Entry' })
+            const desc = document.getElementById('incomeDesc').value;
+            if (!amount || !desc) return showModal('Hitilafu', 'Ingiza kiasi na maelezo ya mapato!', 'error');
+            const incomeData = {
+                amount: Number(amount),
+                description: desc,
+                timestamp: Date.now(),
+                type: 'income'
+            };
+            database.ref('finance').push(incomeData)
                 .then(() => {
                     document.getElementById('incomeAmount').value = '';
+                    document.getElementById('incomeDesc').value = '';
                     loadFinance();
                 });
         }
@@ -903,7 +1389,13 @@ transform: translate(-50%, -50% ) ;
             const amount = document.getElementById('expenseAmount').value;
             const desc = document.getElementById('expenseDesc').value;
             if (!amount || !desc) return showModal('Hitilafu', 'Ingiza kiasi na maelezo ya matumizi!', 'error');
-            database.ref('expenses').push({ amount: Number(amount), description: desc, timestamp: Date.now() })
+            const expenseData = {
+                amount: Number(amount),
+                description: desc,
+                timestamp: Date.now(),
+                type: 'expense'
+            };
+            database.ref('finance').push(expenseData)
                 .then(() => {
                     document.getElementById('expenseAmount').value = '';
                     document.getElementById('expenseDesc').value = '';
@@ -914,21 +1406,27 @@ transform: translate(-50%, -50% ) ;
         function loadFinance() {
             Promise.all([
                 database.ref('payments').once('value'),
-                database.ref('income').once('value'),
-                database.ref('expenses').once('value')
+                database.ref('finance').once('value')
             ])
-                .then(([paymentsSnap, incomeSnap, expensesSnap]) => {
+                .then(([paymentsSnap, financeSnap]) => {
                     const payments = paymentsSnap.val() || {};
-                    const income = incomeSnap.val() || {};
-                    const expenses = expensesSnap.val() || {};
+                    const finance = financeSnap.val() || {};
                     const totalIncome = Object.values(payments).filter(p => p.status === 'confirmed').reduce((sum, p) => sum + Number(p.paymentAmount), 0) +
-                        Object.values(income).reduce((sum, i) => sum + Number(i.amount), 0);
-                    const totalExpenses = Object.values(expenses).reduce((sum, e) => sum + Number(e.amount), 0);
+                        Object.values(finance).filter(f => f.type === 'income').reduce((sum, i) => sum + Number(i.amount), 0);
+                    const totalExpenses = Object.values(finance).filter(f => f.type === 'expense').reduce((sum, e) => sum + Number(e.amount), 0);
+                    
                     document.getElementById('financeSummary').innerHTML = `
                         <p>Mapato: TSh ${totalIncome}</p>
                         <p>Matumizi: TSh ${totalExpenses}</p>
                         <p>Salio: TSh ${totalIncome - totalExpenses}</p>
                     `;
+
+                    let history = '<h3>Historia ya Mapato na Matumizi</h3><table class="table"><tr><th>Aina</th><th>Kiasi</th><th>Maelezo</th><th>Tarehe</th></tr>';
+                    Object.values(finance).sort((a, b) => b.timestamp - a.timestamp).forEach(f => {
+                        history += `<tr><td>${f.type === 'income' ? 'Mapato' : 'Matumizi'}</td><td>TSh ${f.amount}</td><td>${f.description}</td><td>${new Date(f.timestamp).toLocaleString()}</td></tr>`;
+                    });
+                    history += '</table>';
+                    document.getElementById('financeHistory').innerHTML = history;
                 })
                 .catch(err => console.error('Load Finance Error:', err));
         }
@@ -936,13 +1434,11 @@ transform: translate(-50%, -50% ) ;
         function generateFinanceReport(period) {
             Promise.all([
                 database.ref('payments').once('value'),
-                database.ref('income').once('value'),
-                database.ref('expenses').once('value')
+                database.ref('finance').once('value')
             ])
-                .then(([paymentsSnap, incomeSnap, expensesSnap]) => {
+                .then(([paymentsSnap, financeSnap]) => {
                     const payments = paymentsSnap.val() || {};
-                    const income = incomeSnap.val() || {};
-                    const expenses = expensesSnap.val() || {};
+                    const finance = financeSnap.val() || {};
                     const now = new Date();
                     let startTime;
 
@@ -951,8 +1447,7 @@ transform: translate(-50%, -50% ) ;
                     else startTime = now.getTime() - 365 * 24 * 60 * 60 * 1000;
 
                     const filteredPayments = Object.values(payments).filter(p => p.status === 'confirmed' && p.timestamp >= startTime);
-                    const filteredIncome = Object.values(income).filter(i => i.timestamp >= startTime);
-                    const filteredExpenses = Object.values(expenses).filter(e => e.timestamp >= startTime);
+                    const filteredFinance = Object.values(finance).filter(f => f.timestamp >= startTime);
 
                     const doc = new jsPDF();
                     doc.text(`Ripoti ya Mapato/Matumizi - ${period === 'week' ? 'Wiki' : period === 'month' ? 'Mwezi' : 'Mwaka'}`, 10, 10);
@@ -962,18 +1457,19 @@ transform: translate(-50%, -50% ) ;
                         doc.text(`${p.paymentType} - TSh ${p.paymentAmount} (${new Date(p.timestamp).toLocaleString()})`, 10, y);
                         y += 10;
                     });
-                    filteredIncome.forEach(i => {
-                        doc.text(`${i.source} - TSh ${i.amount} (${new Date(i.timestamp).toLocaleString()})`, 10, y);
+                    filteredFinance.filter(f => f.type === 'income').forEach(i => {
+                        doc.text(`${i.description} - TSh ${i.amount} (${new Date(i.timestamp).toLocaleString()})`, 10, y);
                         y += 10;
                     });
                     doc.text('Matumizi', 10, y + 10);
                     y += 20;
-                    filteredExpenses.forEach(e => {
+                    filteredFinance.filter(f => f.type === 'expense').forEach(e => {
                         doc.text(`${e.description} - TSh ${e.amount} (${new Date(e.timestamp).toLocaleString()})`, 10, y);
                         y += 10;
                     });
-                    const totalIncome = filteredPayments.reduce((sum, p) => sum + Number(p.paymentAmount), 0) + filteredIncome.reduce((sum, i) => sum + Number(i.amount), 0);
-                    const totalExpenses = filteredExpenses.reduce((sum, e) => sum + Number(e.amount), 0);
+                    const totalIncome = filteredPayments.reduce((sum, p) => sum + Number(p.paymentAmount), 0) +
+                        filteredFinance.filter(f => f.type === 'income').reduce((sum, i) => sum + Number(i.amount), 0);
+                    const totalExpenses = filteredFinance.filter(f => f.type === 'expense').reduce((sum, e) => sum + Number(e.amount), 0);
                     doc.text(`Jumla ya Mapato: TSh ${totalIncome}`, 10, y + 10);
                     doc.text(`Jumla ya Matumizi: TSh ${totalExpenses}`, 10, y + 20);
                     doc.text(`Salio: TSh ${totalIncome - totalExpenses}`, 10, y + 30);
@@ -981,10 +1477,33 @@ transform: translate(-50%, -50% ) ;
                 });
         }
 
-        function loadConstitution() {
-            database.ref('constitution').once('value')
+        function addLeader() {
+            const name = document.getElementById('leaderName').value;
+            const position = document.getElementById('leaderPosition').value;
+            if (!name || !position) return showModal('Hitilafu', 'Ingiza jina na cheo cha kiongozi!', 'error');
+            database.ref('leaders').push({ name, position, timestamp: Date.now() })
+                .then(() => {
+                    document.getElementById('leaderName').value = '';
+                    document.getElementById('leaderPosition').value = '';
+                    loadLeaders();
+                    showModal('Mafanikio', 'Kiongozi ameongezwa!', 'success');
+                });
+        }
+
+        function loadLeaders() {
+            database.ref('leaders').once('value')
                 .then(snap => {
-                    document.getElementById('constitutionContent').innerHTML = snap.val() || '<p>Hakuna katiba bado.</p>';
+                    const leaders = snap.val() || {};
+                    const list = Object.values(leaders).map(l => 
+                        `<div class="leader-item">
+                            <span class="leader-icon">👑</span>
+                            <div>
+                                <span class="leader-name">${l.name}</span> - 
+                                <span class="leader-position">${l.position}</span>
+                            </div>
+                        </div>`
+                    ).join('');
+                    document.getElementById('leadersList').innerHTML = list || '<p>Hakuna viongozi bado</p>';
                 });
         }
 
@@ -1014,7 +1533,8 @@ transform: translate(-50%, -50% ) ;
                 document.getElementById('adminPanel').style.display = 'block';
                 loadPendingPayments();
                 loadAnnouncements();
-                loadConstitution();
+                loadLeaders();
+                checkEmergencyDeadline();
             } else {
                 showModal('Hitilafu', 'Neno la siri si sahihi!', 'error');
             }
@@ -1026,7 +1546,7 @@ transform: translate(-50%, -50% ) ;
             document.getElementById('adminPassword').value = '';
         }
 
-        function loadPendingPayments() {
+                function loadPendingPayments() {
             database.ref('payments').orderByChild('status').equalTo('pending').once('value')
                 .then(snap => {
                     const payments = snap.val() || {};
@@ -1050,7 +1570,14 @@ transform: translate(-50%, -50% ) ;
 
         function confirmPayment(paymentId) {
             database.ref('payments/' + paymentId).update({ status: 'confirmed', confirmedTimestamp: Date.now() })
-                .then(() => loadPendingPayments());
+                .then(() => {
+                    loadPendingPayments();
+                    loadNonContributors();
+                    database.ref('payments/' + paymentId).once('value').then(snap => {
+                        const payment = snap.val();
+                        checkEntryFeeDebt(payment.paymentPhone); // Update 2: Check entry fee debt after confirmation
+                    });
+                });
         }
 
         function postAnnouncement() {
@@ -1077,22 +1604,184 @@ transform: translate(-50%, -50% ) ;
                 });
         }
 
-        function updateConstitution() {
-            const text = document.getElementById('constitutionText').value;
-            if (!text) return showModal('Hitilafu', 'Ingiza katiba!', 'error');
-            database.ref('constitution').set(text)
-                .then(() => {
-                    document.getElementById('constitutionText').value = '';
-                    loadConstitution();
-                });
-        }
-
         function changeAdminPassword() {
             const newPassword = document.getElementById('newAdminPassword').value;
             if (!newPassword) return showModal('Hitilafu', 'Ingiza neno la siri jipya!', 'error');
             customAdminPassword = newPassword;
             document.getElementById('newAdminPassword').value = '';
             showModal('Mafanikio', 'Neno la siri limebadilishwa!', 'success');
+        }
+
+        function trackDailyUser() {
+            const deviceId = localStorage.getItem('deviceId') || Math.random().toString(36).substring(2);
+            localStorage.setItem('deviceId', deviceId);
+            const today = new Date().toISOString().split('T')[0];
+            const lastVisit = localStorage.getItem('lastVisit');
+            
+            if (lastVisit !== today) {
+                database.ref('dailyUsers/' + today + '/' + deviceId).set({
+                    timestamp: Date.now()
+                });
+                localStorage.setItem('lastVisit', today);
+            }
+            loadDailyUserCount();
+        }
+
+        function loadDailyUserCount() {
+            const today = new Date().toISOString().split('T')[0];
+            database.ref('dailyUsers/' + today).once('value')
+                .then(snap => {
+                    const users = snap.val() || {};
+                    const count = Object.keys(users).length;
+                    document.getElementById('userCount').textContent = count;
+                });
+        }
+
+        // Update 4: Toggle non-contributors visibility
+        let nonContributorsVisible = true;
+        function toggleNonContributors() {
+            nonContributorsVisible = !nonContributorsVisible;
+            document.getElementById('nonContributorsTab').style.display = nonContributorsVisible ? 'block' : 'none';
+            showModal('Mafanikio', `Wasiotoa michango sasa ${nonContributorsVisible ? 'wanaonekana' : 'wamefichwa'}!`, 'success');
+        }
+
+        // Update 6 & 7: Emergency contribution functions
+        function saveEmergencyContribution(data) {
+            database.ref('emergencySettings').once('value')
+                .then(snap => {
+                    const settings = snap.val() || {};
+                    if (!settings.deadline || new Date(settings.deadline) < new Date()) {
+                        showModal('Hitilafu', 'Muda wa mchango wa dharura umeisha au haujawekwa!', 'error');
+                        return;
+                    }
+                    database.ref('emergencyContributions').push(data)
+                        .then(() => {
+                            showModal('Mafanikio', 'Mchango wa dharura umerekodiwa!', 'success');
+                            document.getElementById('emergencyForm').reset();
+                            loadEmergencyHistory();
+                        })
+                        .catch(err => showModal('Hitilafu', 'Tatizo la kurekodi mchango: ' + err.message, 'error'));
+                });
+        }
+
+        function loadEmergencyHistory() {
+            Promise.all([
+                database.ref('emergencyContributions').once('value'),
+                database.ref('members').once('value'),
+                database.ref('emergencySettings').once('value')
+            ])
+                .then(([contributionsSnap, membersSnap, settingsSnap]) => {
+                    const contributions = contributionsSnap.val() || {};
+                    const members = membersSnap.val() || {};
+                    const settings = settingsSnap.val() || {};
+                    const groupedContributions = {};
+
+                    Object.entries(contributions).forEach(([id, c]) => {
+                        const purpose = c.purpose || 'Unknown';
+                        if (!groupedContributions[purpose]) {
+                            groupedContributions[purpose] = [];
+                        }
+                        const member = Object.values(members).find(m => m.phone === c.phone) || { fullName: 'Unknown' };
+                        groupedContributions[purpose].push({
+                            ...c,
+                            fullName: member.fullName,
+                            id
+                        });
+                    });
+
+                    let html = '';
+                    Object.entries(groupedContributions).forEach(([purpose, contribs]) => {
+                        html += `<h4>Mchango: ${purpose}</h4><ul>`;
+                        contribs.forEach(c => {
+                            html += `<li>${c.fullName} - TSh ${c.amount} - ${new Date(c.timestamp).toLocaleString()}</li>`;
+                        });
+                        html += '</ul>';
+                    });
+
+                    document.getElementById('emergencyHistory').innerHTML = html || '<p>Hakuna michango ya dharura bado.</p>';
+                    checkEmergencyDeadline(); // Update 7: Check deadline
+                })
+                .catch(err => console.error('Load Emergency History Error:', err));
+        }
+
+        // Update 7: Set emergency contribution deadline
+        function setEmergencyDeadline() {
+            const name = document.getElementById('emergencyName').value;
+            const deadline = document.getElementById('emergencyDeadline').value;
+            if (!name || !deadline) return showModal('Hitilafu', 'Ingiza jina la mchango na tarehe ya mwisho!', 'error');
+            database.ref('emergencySettings').set({
+                name,
+                deadline,
+                timestamp: Date.now()
+            })
+                .then(() => {
+                    showModal('Mafanikio', 'Muda wa mchango wa dharura umewekwa!', 'success');
+                    document.getElementById('emergencyName').value = '';
+                    document.getElementById('emergencyDeadline').value = '';
+                    checkEmergencyDeadline();
+                });
+        }
+
+        // Update 7: Extend emergency contribution deadline
+        function extendEmergencyDeadline() {
+            database.ref('emergencySettings').once('value')
+                .then(snap => {
+                    const settings = snap.val() || {};
+                    if (!settings.deadline) return showModal('Hitilafu', 'Hakuna mchango wa dharura uliowekwa!', 'error');
+                    const currentDeadline = new Date(settings.deadline);
+                    const newDeadline = new Date(currentDeadline.getTime() + 24 * 60 * 60 * 1000); // Extend by 1 day
+                    database.ref('emergencySettings').update({
+                        deadline: newDeadline.toISOString(),
+                        timestamp: Date.now()
+                    })
+                        .then(() => {
+                            showModal('Mafanikio', 'Muda wa mchango wa dharura umeongezwa!', 'success');
+                            checkEmergencyDeadline();
+                        });
+                });
+        }
+
+        // Update 7: Check emergency contribution deadline
+        function checkEmergencyDeadline() {
+            database.ref('emergencySettings').once('value')
+                .then(snap => {
+                    const settings = snap.val() || {};
+                    const formSection = document.getElementById('emergencyFormSection');
+                    if (settings.deadline && new Date(settings.deadline) < new Date()) {
+                        formSection.innerHTML = '<p>Muda wa mchango wa dharura umeisha!</p>';
+                    } else {
+                        formSection.innerHTML = `
+                            <form id="emergencyForm" class="emergency-form">
+                                <div class="form-group">
+                                    <label>Jina la Mwanachama</label>
+                                    <select id="emergencyMember" required>
+                                        <option value="">Chagua Mwanachama</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Kiasi (TSh)</label>
+                                    <input type="number" id="emergencyAmount" min="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Maelezo (Pesa ya Nini)</label>
+                                    <input type="text" id="emergencyPurpose" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Tuma Mchango</button>
+                            </form>
+                        `;
+                        loadEmergencyMembers();
+                        document.getElementById('emergencyForm').addEventListener('submit', function (e) {
+                            e.preventDefault();
+                            const data = {
+                                phone: document.getElementById('emergencyMember').value,
+                                amount: document.getElementById('emergencyAmount').value,
+                                purpose: document.getElementById('emergencyPurpose').value,
+                                timestamp: Date.now()
+                            };
+                            saveEmergencyContribution(data);
+                        });
+                    }
+                });
         }
 
         function printPersonalReport() {
@@ -1113,7 +1802,8 @@ transform: translate(-50%, -50% ) ;
                     report += '</ul>';
 
                     const paidMonths = new Set(confirmedPayments.filter(p => p.paymentType === 'Ada').map(p => p.paymentMonth));
-                    const paidEntryFee = confirmedPayments.some(p => p.paymentType === 'Hela ya Kiingilio');
+                    const entryPayments = confirmedPayments.filter(p => p.paymentType === 'Hela ya Kiingilio');
+                    const totalEntryPaid = entryPayments.reduce((sum, p) => sum + Number(p.paymentAmount), 0);
                     let debt = 0;
                     let pending = '<h4>Michango Inayodaiwa</h4><ul>';
                     for (let i = 0; i <= CURRENT_MONTH_INDEX; i++) {
@@ -1122,9 +1812,10 @@ transform: translate(-50%, -50% ) ;
                             debt += MONTHLY_FEE;
                         }
                     }
-                    if (!paidEntryFee) {
-                        pending += `<li>Hela ya Kiingilio - TSh ${ENTRY_FEE}</li>`;
-                        debt += ENTRY_FEE;
+                    if (totalEntryPaid < ENTRY_FEE) {
+                        const entryDebt = ENTRY_FEE - totalEntryPaid;
+                        pending += `<li>Hela ya Kiingilio - TSh ${entryDebt}</li>`;
+                        debt += entryDebt;
                     }
                     pending += '</ul>';
                     report += pending + `<p><strong>Jumla ya Madeni: TSh ${debt}</strong></p>`;
@@ -1172,95 +1863,143 @@ transform: translate(-50%, -50% ) ;
                 .then(([membersSnap, paymentsSnap]) => {
                     const members = membersSnap.val() || {};
                     const payments = paymentsSnap.val() || {};
-                    let report = `<h3>Michango - ${type}</h3><h4>Waliotoa</h4><ul>`;
-                    Object.values(payments).filter(p => p.status === 'confirmed').forEach(p => {
-                        const member = Object.values(members).find(m => m.phone === p.paymentPhone);
-                        report += `<li>${member.fullName} - TSh ${p.paymentAmount}</li>`;
+                    const paidPhones = new Set(Object.values(payments).filter(p => p.status === 'confirmed').map(p => p.paymentPhone));
+                    let report = `<h3>Michango ya ${type}</h3><h4>Waliotoa</h4><ul>`;
+                    Object.values(members).forEach(m => {
+                        if (paidPhones.has(m.phone)) {
+                            const payment = Object.values(payments).find(p => p.paymentPhone === m.phone);
+                            report += `<li>${m.fullName} - TSh ${payment.paymentAmount} (${payment.paymentMonth || payment.paymentDate})</li>`;
+                        }
                     });
                     report += '</ul><h4>Waliobaki</h4><ul>';
-                    const paidPhones = new Set(Object.values(payments).map(p => p.paymentPhone));
                     Object.values(members).forEach(m => {
                         if (!paidPhones.has(m.phone)) report += `<li>${m.fullName}</li>`;
                     });
                     report += '</ul>';
                     const printWindow = window.open('', '_blank');
-                    printWindow.document.write(`<html><head><title>Michango</title></head><body>${report}</body></html>`);
+                    printWindow.document.write(`<html><head><title>Michango ya ${type}</title></head><body>${report}</body></html>`);
                     printWindow.document.close();
                     printWindow.print();
+                })
+                .catch(err => {
+                    console.error('Print Contributions Error:', err);
+                    showModal('Hitilafu', 'Tatizo la kuchapisha michango: ' + err.message, 'error');
                 });
         }
 
         function printFinance() {
             Promise.all([
                 database.ref('payments').once('value'),
-                database.ref('income').once('value'),
-                database.ref('expenses').once('value')
+                database.ref('finance').once('value')
             ])
-                .then(([paymentsSnap, incomeSnap, expensesSnap]) => {
+                .then(([paymentsSnap, financeSnap]) => {
                     const payments = paymentsSnap.val() || {};
-                    const income = incomeSnap.val() || {};
-                    const expenses = expensesSnap.val() || {};
+                    const finance = financeSnap.val() || {};
                     const totalIncome = Object.values(payments).filter(p => p.status === 'confirmed').reduce((sum, p) => sum + Number(p.paymentAmount), 0) +
-                        Object.values(income).reduce((sum, i) => sum + Number(i.amount), 0);
-                    const totalExpenses = Object.values(expenses).reduce((sum, e) => sum + Number(e.amount), 0);
-                    let report = `<h3>Mapato/Matumizi</h3><p>Mapato: TSh ${totalIncome}</p><p>Matumizi: TSh ${totalExpenses}</p><p>Salio: TSh ${totalIncome - totalExpenses}</p>`;
+                        Object.values(finance).filter(f => f.type === 'income').reduce((sum, i) => sum + Number(i.amount), 0);
+                    const totalExpenses = Object.values(finance).filter(f => f.type === 'expense').reduce((sum, e) => sum + Number(e.amount), 0);
+                    let report = `<h3>Ripoti ya Mapato na Matumizi</h3><p>Mapato: TSh ${totalIncome}</p><p>Matumizi: TSh ${totalExpenses}</p><p>Salio: TSh ${totalIncome - totalExpenses}</p>`;
+                    report += '<h4>Historia</h4><ul>';
+                    Object.values(finance).sort((a, b) => b.timestamp - a.timestamp).forEach(f => {
+                        report += `<li>${f.type === 'income' ? 'Mapato' : 'Matumizi'} - TSh ${f.amount} (${f.description}) - ${new Date(f.timestamp).toLocaleString()}</li>`;
+                    });
+                    report += '</ul>';
                     const printWindow = window.open('', '_blank');
-                    printWindow.document.write(`<html><head><title>Mapato/Matumizi</title></head><body>${report}</body></html>`);
+                    printWindow.document.write(`<html><head><title>Ripoti ya Fedha</title></head><body>${report}</body></html>`);
                     printWindow.document.close();
                     printWindow.print();
+                })
+                .catch(err => {
+                    console.error('Print Finance Error:', err);
+                    showModal('Hitilafu', 'Tatizo la kuchapisha ripoti ya fedha: ' + err.message, 'error');
                 });
         }
 
-        window.onload = function() {
+        function printNonContributors() {
+            Promise.all([
+                database.ref('members').once('value'),
+                database.ref('payments').once('value')
+            ])
+                .then(([membersSnap, paymentsSnap]) => {
+                    const members = membersSnap.val() || {};
+                    const payments = paymentsSnap.val() || {};
+                    const paidPhones = new Set(Object.values(payments).filter(p => p.status === 'confirmed').map(p => p.paymentPhone));
+                    let report = `<h3>Wanachama Wasiotoa Michango</h3><ul>`;
+                    Object.values(members).forEach(m => {
+                        if (!paidPhones.has(m.phone)) {
+                            report += `<li>${m.fullName} - ${m.phone}</li>`;
+                        }
+                    });
+                    report += '</ul>';
+                    if (!report.includes('<li>')) report = '<h3>Wanachama Wasiotoa Michango</h3><p>Hakuna wanachama wasiotoa michango.</p>';
+                    const printWindow = window.open('', '_blank');
+                    printWindow.document.write(`<html><head><title>Wasiotoa Michango</title></head><body>${report}</body></html>`);
+                    printWindow.document.close();
+                    printWindow.print();
+                })
+                .catch(err => {
+                    console.error('Print Non-Contributors Error:', err);
+                    showModal('Hitilafu', 'Tatizo la kuchapisha orodha ya wasiotoa michango: ' + err.message, 'error');
+                });
+        }
+
+        // Initialize page
+        window.onload = function () {
             setTimeout(() => {
                 document.getElementById('loadingScreen').style.display = 'none';
                 document.querySelector('.container').style.display = 'block';
-                openTab('home');
-            }, 3000);
-
-            document.getElementById('registrationForm').addEventListener('submit', e => {
-                e.preventDefault();
-                const data = {
-                    fullName: document.getElementById('fullName').value,
-                    phone: document.getElementById('phone').value,
-                    address: document.getElementById('address').value,
-                    timestamp: Date.now(),
-                    status: 'active'
-                };
-                saveRegistration(data);
-            });
-
-            document.getElementById('paymentForm').addEventListener('submit', e => {
-                e.preventDefault();
-                const paymentType = document.getElementById('paymentType').value;
-                const data = {
-                    paymentPhone: document.getElementById('paymentMember').value,
-                    paymentType: paymentType,
-                    paymentMonth: paymentType === 'Ada' ? document.getElementById('feeMonth').value : null,
-                    paymentDate: paymentType !== 'Ada' ? document.getElementById('paymentDate').value : null,
-                    paymentAmount: Number(document.getElementById('paymentAmount').value),
-                    timestamp: Date.now(),
-                    status: 'pending'
-                };
-                savePayment(data);
-            });
-
-            document.getElementById('commentForm').addEventListener('submit', e => {
-                e.preventDefault();
-                const name = document.getElementById('commentName')?.value;
-                const text = document.getElementById('commentText')?.value;
-                if (!name || !text) return showModal('Hitilafu', 'Jaza jina na maoni!', 'error');
-                const data = { name, text, timestamp: Date.now() };
-                saveComment(data);
-            });
-
+            }, 3000); // 3-second loading screen
             loadMembers();
             loadMembersAlphabetically();
-            loadFinance();
-            loadConstitution();
-            loadComments();
             loadAnnouncements();
+            loadComments();
+            loadLeaders();
+            loadFinance();
+            loadNonContributors();
+            loadEmergencyHistory(); // Update 6: Load emergency history
+            checkEmergencyDeadline(); // Update 7: Check deadline
+            trackDailyUser();
         };
+
+        // Form submissions
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const data = {
+                fullName: document.getElementById('fullName').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                timestamp: Date.now()
+            };
+            saveRegistration(data);
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const paymentType = document.getElementById('paymentType').value;
+            const data = {
+                paymentPhone: document.getElementById('paymentMember').value,
+                paymentType: paymentType,
+                paymentAmount: document.getElementById('paymentAmount').value,
+                status: 'pending',
+                timestamp: Date.now()
+            };
+            if (paymentType === 'Ada') {
+                data.paymentMonth = document.getElementById('feeMonth').value;
+            } else {
+                data.paymentDate = document.getElementById('paymentDate').value;
+            }
+            savePayment(data);
+        });
+
+        document.getElementById('commentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('commentName').value,
+                text: document.getElementById('commentText').value,
+                timestamp: Date.now()
+            };
+            saveComment(data);
+        });
     </script>
 </body>
 </html>
