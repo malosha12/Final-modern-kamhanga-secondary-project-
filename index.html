@@ -30,7 +30,8 @@
             overflow-x: hidden;
         }
 
-        #loadingScreen {
+        /* Login Screen Styles */
+        #loginScreen {
             position: fixed;
             top: 0;
             left: 0;
@@ -44,73 +45,100 @@
             overflow: hidden;
         }
 
-        .rainfall {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="transparent"/><line x1="0" y1="0" x2="0" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="1"/></svg>');
-            animation: rainfall 0.5s linear infinite;
-        }
-
-        @keyframes rainfall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(20px); }
-        }
-
-        .spinner {
-            width: 80px;
-            height: 80px;
-            border: 10px solid rgba(255, 255, 255, 0.2);
-            border-top: 10px solid #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite, glow 2s ease-in-out infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(255, 255, 255, 1); }
-            100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-        }
-
-        .loading-text {
-            color: white;
-            font-size: 28px;
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 2s ease-in-out;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .login-container h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .login-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .login-group input {
+            width: 100%;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 25px;
+            background: #f1f1f1;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .login-group input:focus {
+            outline: none;
+            background: #e8f0fe;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .login-group .icon {
             position: absolute;
-            top: 65%;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 18px;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: var(--primary);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        /* Update 3: Moving icon for loading screen */
-        .group-icon {
-            position: absolute;
-            font-size: 50px;
-            top: 30%;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounceGroup 1.5s infinite;
+        .login-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
         }
 
-        @keyframes bounceGroup {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, -20px); }
+        .powered-by-footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .powered-by-footer .malosha {
+            display: inline-block;
+            animation: colorChange 6s infinite, treePulse 2s infinite;
+            font-weight: bold;
+        }
+
+        @keyframes treePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes colorChange {
+            0% { color: #3498db; }
+            33% { color: #2ecc71; }
+            66% { color: #9b59b6; }
+            100% { color: #3498db; }
         }
 
         .container {
@@ -394,20 +422,16 @@
             color: var(--light);
             border-radius: 10px;
             margin-top: 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Update 1: Animated colors for Powered by Malosha */
         .powered-by {
             display: inline-block;
             animation: colorChange 6s infinite;
             font-weight: bold;
-        }
-
-        @keyframes colorChange {
-            0% { color: #3498db; }
-            33% { color: #2ecc71; }
-            66% { color: #9b59b6; }
-            100% { color: #3498db; }
+            font-size: 16px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .table {
@@ -459,7 +483,6 @@
             margin-left: 20px;
         }
 
-        /* Update 5: Leaders styling */
         .leader-item {
             display: flex;
             align-items: center;
@@ -490,7 +513,6 @@
             color: #f1c40f;
         }
 
-        /* Update 6 & 7: Emergency contribution form styling */
         .emergency-form input,
         .emergency-form select {
             margin-bottom: 10px;
@@ -536,9 +558,7 @@
         @media (max-width: 767px) {
             .nav-menu ul { flex-direction: column; }
             .header h1 { font-size: 22px; }
-            .loading-text { font-size: 20px; }
             .btn { width: 100%; }
-            .spinner { width: 60px; height: 60px; border-width: 8px; }
             .constitution-content h1 { font-size: 20px; }
             .constitution-content h2 { font-size: 18px; }
             .constitution-content h3 { font-size: 16px; }
@@ -554,11 +574,24 @@
     </style>
 </head>
 <body>
-    <div id="loadingScreen">
-        <div class="rainfall"></div>
-        <div class="spinner"></div>
-        <div class="group-icon">🌍</div>
-        <div class="loading-text">KAMHANGA GROUP <br> your warmly welcome</div>
+    <div id="loginScreen">
+        <div class="login-container">
+            <h2>KAMHANGA ADVANCED GROUP</h2>
+            <form id="loginForm">
+                <div class="login-group">
+                    <span class="icon">👤</span>
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="login-group">
+                    <span class="icon">🔒</span>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">Ingia</button>
+            </form>
+            <div class="powered-by-footer">
+                POWERED  BY<span class="malosha">🌳 MALOSHA</span>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -878,50 +911,50 @@
                     </ol>
 
                     <h3>Ibara ya 9: Majukumu ya Uongozi</h3>
-<ol>
-    <li><strong>Mwenyekiti:</strong>
-        <ol>
-            <li>Kuongoza vikao vya kikundi kwa ufanisi.</li>
-            <li>Kusimamia utekelezaji wa maamuzi ya vikao.</li>
-            <li>Kuwakilisha kundi kwenye shughuli za nje.</li>
-            <li>Kuhakikisha mshikamano, nidhamu na amani ndani ya kundi.</li>
-            <li>Kuweka mwelekeo na dira ya maendeleo ya kundi.</li>
-            <li>Kutoa uamuzi wa mwisho pale panapohitajika.</li>
-            <li>Kuhamasisha ushiriki wa wanachama katika shughuli.</li>
-            <li>Kusimamia utendaji wa viongozi wengine.</li>
-            <li>Kushughulikia migogoro kwa hekima.</li>
-            <li>Kuwa msemaji rasmi wa kundi.</li>
-        </ol>
-    </li>
-    <li><strong>Katibu:</strong>
-        <ol>
-            <li>Kuandika na kutunza kumbukumbu za vikao.</li>
-            <li>Kuandaa ajenda na ratiba ya mikutano.</li>
-            <li>Kutunza nyaraka muhimu za kundi.</li>
-            <li>Kusambaza taarifa kwa wanachama.</li>
-            <li>Kuhifadhi orodha na taarifa za wanachama.</li>
-            <li>Kukumbusha wanachama kuhusu michango/vikao.</li>
-            <li>Kusimamia usajili wa wanachama wapya.</li>
-            <li>Kuandaa ripoti ya maendeleo ya kundi.</li>
-            <li>Kuandaa barua rasmi na nyaraka za mawasiliano.</li>
-            <li>Kuratibu taarifa za mwaka kwa viongozi na wanachama.</li>
-        </ol>
-    </li>
-    <li><strong>Mhazini:</strong>
-        <ol>
-            <li>Kukusanya michango yote ya wanachama.</li>
-            <li>Kutunza fedha za kikundi kwa usalama.</li>
-            <li>Kutoa fedha kwa matumizi kwa idhini rasmi.</li>
-            <li>Kutunza kumbukumbu za mapato na matumizi.</li>
-            <li>Kuandaa taarifa za kifedha kwa vikao.</li>
-            <li>Kuweka taarifa binafsi za michango kwa kila mwanachama.</li>
-            <li>Kuandaa na kuwasilisha bajeti ya matumizi ya kikundi.</li>
-            <li>Kuhifadhi vocha, risiti na ushahidi wa manunuzi.</li>
-            <li>Kusimamia mali za kikundi zinazohusiana na fedha.</li>
-            <li>Kutoa ripoti ya kifedha ya mwaka mzima.</li>
-        </ol>
-    </li>
-</ol>
+                    <ol>
+                        <li><strong>Mwenyekiti:</strong>
+                            <ol>
+                                <li>Kuongoza vikao vya kikundi kwa ufanisi.</li>
+                                <li>Kusimamia utekelezaji wa maamuzi ya vikao.</li>
+                                <li>Kuwakilisha kundi kwenye shughuli za nje.</li>
+                                <li>Kuhakikisha mshikamano, nidhamu na amani ndani ya kundi.</li>
+                                <li>Kuweka mwelekeo na dira ya maendeleo ya kundi.</li>
+                                <li>Kutoa uamuzi wa mwisho pale panapohitajika.</li>
+                                <li>Kuhamasisha ushiriki wa wanachama katika shughuli.</li>
+                                <li>Kusimamia utendaji wa viongozi wengine.</li>
+                                <li>Kushughulikia migogoro kwa hekima.</li>
+                                <li>Kuwa msemaji rasmi wa kundi.</li>
+                            </ol>
+                        </li>
+                        <li><strong>Katibu:</strong>
+                            <ol>
+                                <li>Kuandika na kutunza kumbukumbu za vikao.</li>
+                                <li>Kuandaa ajenda na ratiba ya mikutano.</li>
+                                <li>Kutunza nyaraka muhimu za kundi.</li>
+                                <li>Kusambaza taarifa kwa wanachama.</li>
+                                <li>Kuhifadhi orodha na taarifa za wanachama.</li>
+                                <li>Kukumbusha wanachama kuhusu michango/vikao.</li>
+                                <li>Kusimamia usajili wa wanachama wapya.</li>
+                                <li>Kuandaa ripoti ya maendeleo ya kundi.</li>
+                                <li>Kuandaa barua rasmi na nyaraka za mawasiliano.</li>
+                                <li>Kuratibu taarifa za mwaka kwa viongozi na wanachama.</li>
+                            </ol>
+                        </li>
+                        <li><strong>Mhazini:</strong>
+                            <ol>
+                                <li>Kukusanya michango yote ya wanachama.</li>
+                                <li>Kutunza fedha za kikundi kwa usalama.</li>
+                                <li>Kutoa fedha kwa matumizi kwa idhini rasmi.</li>
+                                <li>Kutunza kumbukumbu za mapato na matumizi.</li>
+                                <li>Kuandaa taarifa za kifedha kwa vikao.</li>
+                                <li>Kuweka taarifa binafsi za michango kwa kila mwanachama.</li>
+                                <li>Kuandaa na kuwasilisha bajeti ya matumizi ya kikundi.</li>
+                                <li>Kuhifadhi vocha, risiti na ushahidi wa manunuzi.</li>
+                                <li>Kusimamia mali za kikundi zinazohusiana na fedha.</li>
+                                <li>Kutoa ripoti ya kifedha ya mwaka mzima.</li>
+                            </ol>
+                        </li>
+                    </ol>
                     <h3>Ibara ya 11: Shughuli za Pamoja</h3>
                     <ol>
                         <li>Kundi litapanga sherehe ya kila mwaka kwa ajili ya kukutana na kusherehekea mafanikio.</li>
@@ -965,7 +998,7 @@
                     </ol>
 
                     <h2>SURA YA SABA: MABADILIKO YA KATIBA</h2>
-                    <h3>Ibara ya 14: Utaratibu wa Marekebisho</h3>
+                      <h3>Ibara ya 14: Utaratibu wa Marekebisho</h3>
                     <ol>
                         <li>Katiba hii inaweza kurekebishwa kulingana na maoni ya wanachama wote.</li>
                         <li>Mapendekezo ya marekebisho yatapitiwa na kupitishwa katika kikao rasmi cha kundi.</li>
@@ -1099,10 +1132,14 @@
                     <button class="btn btn-primary" onclick="setEmergencyDeadline()">Weka Muda</button>
                     <button class="btn btn-primary" onclick="extendEmergencyDeadline()">Ongeza Muda</button>
                     <div class="form-group">
-                        <label>Badilisha Neno la Siri</label>
-                        <input type="password" id="newAdminPassword">
-                        <button class="btn btn-primary" onclick="changeAdminPassword()">Badilisha</button>
+                        <label>Badilisha Jina la Mtumiaji la Ingia</label>
+                        <input type="text" id="newLoginUsername" placeholder="Jina la Mtumiaji Jipya">
                     </div>
+                    <div class="form-group">
+                        <label>Badilisha Neno la Siri la Ingia</label>
+                        <input type="password" id="newLoginPassword" placeholder="Neno la Siri Jipya">
+                    </div>
+                    <button class="btn btn-primary" onclick="changeLoginCredentials()">Badilisha Jina/Neno la Siri</button>
                 </div>
             </div>
         </div>
@@ -1149,6 +1186,10 @@
         const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const CURRENT_MONTH_INDEX = 3; // April (0-based index)
 
+        // Default login credentials
+        let loginUsername = '1340';
+        let loginPassword = '1340';
+
         function showModal(title, message, type = 'info') {
             const modal = document.getElementById('modal');
             const modalContent = modal.querySelector('.modal-content');
@@ -1168,6 +1209,34 @@
             document.querySelectorAll('.nav-menu li').forEach(li => li.classList.remove('active'));
             document.getElementById(tabName).style.display = 'block';
             document.querySelector(`.nav-menu li[onclick="openTab('${tabName}')"]`).classList.add('active');
+        }
+
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === loginUsername && password === loginPassword) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.querySelector('.container').style.display = 'block';
+            } else {
+                showModal('Hitilafu', 'Jina la mtumiaji au neno la siri si sahihi!', 'error');
+            }
+        });
+
+        // Change login credentials
+        function changeLoginCredentials() {
+            const newUsername = document.getElementById('newLoginUsername').value;
+            const newPassword = document.getElementById('newLoginPassword').value;
+            if (!newUsername && !newPassword) {
+                showModal('Hitilafu', 'Ingiza angalau jina la mtumiaji au neno la siri jipya!', 'error');
+                return;
+            }
+            if (newUsername) loginUsername = newUsername;
+            if (newPassword) loginPassword = newPassword;
+            document.getElementById('newLoginUsername').value = '';
+            document.getElementById('newLoginPassword').value = '';
+            showModal('Mafanikio', 'Jina la mtumiaji au neno la siri limebadilishwa! Hello, sasa unaweza kutumia credentials mpya.', 'success');
         }
 
         function saveRegistration(data) {
@@ -1298,7 +1367,9 @@
                 .then(([membersSnap, paymentsSnap]) => {
                     const members = membersSnap.val() || {};
                     const payments = paymentsSnap.val() || {};
-                    const paidPhones = new Set(Object.values(payments).filter(p => p.status === 'confirmed').map(p => p.paymentPhone));
+                    const paidPhones = new Set(Object
+
+.values(payments).filter(p => p.status === 'confirmed').map(p => p.paymentPhone));
                     let paid = '', unpaid = '';
                     Object.values(members).forEach(m => {
                         if (paidPhones.has(m.phone)) paid += `<li>${m.fullName} - Amelipa</li>`;
@@ -1386,7 +1457,7 @@
                         }
                     }
                     if (totalEntryPaid < ENTRY_FEE) {
-                       const entryDebt = ENTRY_FEE - totalEntryPaid;
+                        const entryDebt = ENTRY_FEE - totalEntryPaid;
                         pending += `<li>Hela ya Kiingilio - TSh ${entryDebt}</li>`;
                         debt += entryDebt;
                     }
@@ -1480,337 +1551,51 @@
                     const filteredFinance = Object.values(finance).filter(f => f.timestamp >= startTime);
 
                     const doc = new jsPDF();
+                    doc.setFontSize(16);
                     doc.text(`Ripoti ya Mapato/Matumizi - ${period === 'week' ? 'Wiki' : period === 'month' ? 'Mwezi' : 'Mwaka'}`, 10, 10);
-                    doc.text('Mapato', 10, 20);
+                    doc.setFontSize(12);
+                    doc.text(`Tarehe: ${now.toLocaleString()}`, 10, 20);
                     let y = 30;
+
+                    doc.text('Mapato', 10, y);
+                    y += 10;
+                    let totalIncome = 0;
                     filteredPayments.forEach(p => {
-                        doc.text(`${p.paymentType} - TSh ${p.paymentAmount} (${new Date(p.timestamp).toLocaleString()})`, 10, y);
+                        doc.text(`${p.paymentType} - ${p.paymentPhone} - TSh ${p.paymentAmount} (${new Date(p.timestamp).toLocaleString()})`, 10, y);
+                        totalIncome += Number(p.paymentAmount);
                         y += 10;
                     });
                     filteredFinance.filter(f => f.type === 'income').forEach(i => {
                         doc.text(`${i.description} - TSh ${i.amount} (${new Date(i.timestamp).toLocaleString()})`, 10, y);
+                        totalIncome += Number(i.amount);
                         y += 10;
                     });
-                    doc.text('Matumizi', 10, y + 10);
+
+                    doc.text(`Jumla ya Mapato: TSh ${totalIncome}`, 10, y);
                     y += 20;
+
+                    doc.text('Matumizi', 10, y);
+                    y += 10;
+                    let totalExpenses = 0;
                     filteredFinance.filter(f => f.type === 'expense').forEach(e => {
                         doc.text(`${e.description} - TSh ${e.amount} (${new Date(e.timestamp).toLocaleString()})`, 10, y);
+                        totalExpenses += Number(e.amount);
                         y += 10;
                     });
-                    const totalIncome = filteredPayments.reduce((sum, p) => sum + Number(p.paymentAmount), 0) +
-                        filteredFinance.filter(f => f.type === 'income').reduce((sum, i) => sum + Number(i.amount), 0);
-                    const totalExpenses = filteredFinance.filter(f => f.type === 'expense').reduce((sum, e) => sum + Number(e.amount), 0);
-                    doc.text(`Jumla ya Mapato: TSh ${totalIncome}`, 10, y + 10);
-                    doc.text(`Jumla ya Matumizi: TSh ${totalExpenses}`, 10, y + 20);
-                    doc.text(`Salio: TSh ${totalIncome - totalExpenses}`, 10, y + 30);
-                    doc.save(`Ripoti_${period}_${new Date().toISOString().split('T')[0]}.pdf`);
-                });
-        }
 
-        function addLeader() {
-            const name = document.getElementById('leaderName').value;
-            const position = document.getElementById('leaderPosition').value;
-            if (!name || !position) return showModal('Hitilafu', 'Ingiza jina na cheo cha kiongozi!', 'error');
-            database.ref('leaders').push({ name, position, timestamp: Date.now() })
-                .then(() => {
-                    document.getElementById('leaderName').value = '';
-                    document.getElementById('leaderPosition').value = '';
-                    loadLeaders();
-                    showModal('Mafanikio', 'Kiongozi ameongezwa!', 'success');
-                });
-        }
+                    doc.text(`Jumla ya Matumizi: TSh ${totalExpenses}`, 10, y);
+                    y += 20;
 
-        function loadLeaders() {
-            database.ref('leaders').once('value')
-                .then(snap => {
-                    const leaders = snap.val() || {};
-                    const list = Object.values(leaders).map(l => 
-                        `<div class="leader-item">
-                            <span class="leader-icon">👑</span>
-                            <div>
-                                <span class="leader-name">${l.name}</span> - 
-                                <span class="leader-position">${l.position}</span>
-                            </div>
-                        </div>`
-                    ).join('');
-                    document.getElementById('leadersList').innerHTML = list || '<p>Hakuna viongozi bado</p>';
-                });
-        }
+                    const balance = totalIncome - totalExpenses;
+                    doc.text(`Salio: TSh ${balance}`, 10, y);
+                    y += 20;
 
-        function saveComment(data) {
-            database.ref('comments').push(data)
-                .then(() => {
-                    showModal('Maoni', 'Maoni yako yametumwa!', 'success');
-                    document.getElementById('commentForm').reset();
-                    loadComments();
+                    doc.text('Imeandaliwa na Kamhanga Advanced Group', 10, y);
+                    doc.save(`Ripoti_Fedha_${period}_${now.getTime()}.pdf`);
                 })
-                .catch(err => showModal('Hitilafu', 'Tatizo la kutuma maoni: ' + err.message, 'error'));
-        }
-
-        function loadComments() {
-            database.ref('comments').once('value')
-                .then(snap => {
-                    const comments = snap.val() || {};
-                    const list = Object.values(comments).map(c => `<li><strong>${c.name}</strong>: ${c.text} (${new Date(c.timestamp).toLocaleString()})</li>`).join('');
-                    document.getElementById('commentsList').innerHTML = `<ul>${list || '<li>Hakuna maoni bado</li>'}</ul>`;
-                });
-        }
-
-        function loginAdmin() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === CONSTANT_PASSWORD || password === customAdminPassword) {
-                document.getElementById('adminLoginForm').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                loadPendingPayments();
-                loadAnnouncements();
-                loadLeaders();
-                checkEmergencyDeadline();
-            } else {
-                showModal('Hitilafu', 'Neno la siri si sahihi!', 'error');
-            }
-        }
-
-        function logoutAdmin() {
-            document.getElementById('adminPanel').style.display = 'none';
-            document.getElementById('adminLoginForm').style.display = 'block';
-            document.getElementById('adminPassword').value = '';
-        }
-
-                function loadPendingPayments() {
-            database.ref('payments').orderByChild('status').equalTo('pending').once('value')
-                .then(snap => {
-                    const payments = snap.val() || {};
-                    let html = '<table class="table"><tr><th>Jina</th><th>Aina</th><th>Kiasi</th><th>Thibitisha</th></tr>';
-                    Promise.all(
-                        Object.entries(payments).map(([id, p]) => {
-                            if (!p.paymentPhone) return Promise.resolve('');
-                            return database.ref('members').orderByChild('phone').equalTo(p.paymentPhone).once('value')
-                                .then(memberSnap => {
-                                    const member = Object.values(memberSnap.val() || {})[0] || { fullName: 'Unknown' };
-                                    return `<tr><td>${member.fullName}</td><td>${p.paymentType}</td><td>TSh ${p.paymentAmount}</td><td><button class="btn btn-success" onclick="confirmPayment('${id}')">Thibitisha</button></td></tr>`;
-                                });
-                        })
-                    ).then(rows => {
-                        html += rows.join('') + '</table>';
-                        document.getElementById('pendingPaymentsTable').innerHTML = html;
-                    });
-                })
-                .catch(err => console.error('Load Pending Payments Error:', err));
-        }
-
-        function confirmPayment(paymentId) {
-            database.ref('payments/' + paymentId).update({ status: 'confirmed', confirmedTimestamp: Date.now() })
-                .then(() => {
-                    loadPendingPayments();
-                    loadNonContributors();
-                    database.ref('payments/' + paymentId).once('value').then(snap => {
-                        const payment = snap.val();
-                        checkEntryFeeDebt(payment.paymentPhone); // Update 2: Check entry fee debt after confirmation
-                    });
-                });
-        }
-
-        function postAnnouncement() {
-            const text = document.getElementById('announcementTextInput').value;
-            if (!text) return showModal('Hitilafu', 'Ingiza tangazo!', 'error');
-            database.ref('announcements').set({ text, timestamp: Date.now() })
-                .then(() => {
-                    document.getElementById('announcementTextInput').value = '';
-                    loadAnnouncements();
-                });
-        }
-
-        function loadAnnouncements() {
-            database.ref('announcements').once('value')
-                .then(snap => {
-                    const announcements = snap.val() || {};
-                    if (announcements.text) {
-                        document.getElementById('announcementText').textContent = announcements.text;
-                        document.getElementById('announcementsList').innerHTML = `<h3>Matangazo</h3><ul><li>${announcements.text} (${new Date(announcements.timestamp).toLocaleString()})</li></ul>`;
-                    } else {
-                        document.getElementById('announcementText').textContent = 'Hakuna tangazo bado.';
-                        document.getElementById('announcementsList').innerHTML = '<h3>Matangazo</h3><ul><li>Hakuna matangazo bado</li></ul>';
-                    }
-                });
-        }
-
-        function changeAdminPassword() {
-            const newPassword = document.getElementById('newAdminPassword').value;
-            if (!newPassword) return showModal('Hitilafu', 'Ingiza neno la siri jipya!', 'error');
-            customAdminPassword = newPassword;
-            document.getElementById('newAdminPassword').value = '';
-            showModal('Mafanikio', 'Neno la siri limebadilishwa!', 'success');
-        }
-
-        function trackDailyUser() {
-            const deviceId = localStorage.getItem('deviceId') || Math.random().toString(36).substring(2);
-            localStorage.setItem('deviceId', deviceId);
-            const today = new Date().toISOString().split('T')[0];
-            const lastVisit = localStorage.getItem('lastVisit');
-            
-            if (lastVisit !== today) {
-                database.ref('dailyUsers/' + today + '/' + deviceId).set({
-                    timestamp: Date.now()
-                });
-                localStorage.setItem('lastVisit', today);
-            }
-            loadDailyUserCount();
-        }
-
-        function loadDailyUserCount() {
-            const today = new Date().toISOString().split('T')[0];
-            database.ref('dailyUsers/' + today).once('value')
-                .then(snap => {
-                    const users = snap.val() || {};
-                    const count = Object.keys(users).length;
-                    document.getElementById('userCount').textContent = count;
-                });
-        }
-
-        // Update 4: Toggle non-contributors visibility
-        let nonContributorsVisible = true;
-        function toggleNonContributors() {
-            nonContributorsVisible = !nonContributorsVisible;
-            document.getElementById('nonContributorsTab').style.display = nonContributorsVisible ? 'block' : 'none';
-            showModal('Mafanikio', `Wasiotoa michango sasa ${nonContributorsVisible ? 'wanaonekana' : 'wamefichwa'}!`, 'success');
-        }
-
-        // Update 6 & 7: Emergency contribution functions
-        function saveEmergencyContribution(data) {
-            database.ref('emergencySettings').once('value')
-                .then(snap => {
-                    const settings = snap.val() || {};
-                    if (!settings.deadline || new Date(settings.deadline) < new Date()) {
-                        showModal('Hitilafu', 'Muda wa mchango wa dharura umeisha au haujawekwa!', 'error');
-                        return;
-                    }
-                    database.ref('emergencyContributions').push(data)
-                        .then(() => {
-                            showModal('Mafanikio', 'Mchango wa dharura umerekodiwa!', 'success');
-                            document.getElementById('emergencyForm').reset();
-                            loadEmergencyHistory();
-                        })
-                        .catch(err => showModal('Hitilafu', 'Tatizo la kurekodi mchango: ' + err.message, 'error'));
-                });
-        }
-
-        function loadEmergencyHistory() {
-            Promise.all([
-                database.ref('emergencyContributions').once('value'),
-                database.ref('members').once('value'),
-                database.ref('emergencySettings').once('value')
-            ])
-                .then(([contributionsSnap, membersSnap, settingsSnap]) => {
-                    const contributions = contributionsSnap.val() || {};
-                    const members = membersSnap.val() || {};
-                    const settings = settingsSnap.val() || {};
-                    const groupedContributions = {};
-
-                    Object.entries(contributions).forEach(([id, c]) => {
-                        const purpose = c.purpose || 'Unknown';
-                        if (!groupedContributions[purpose]) {
-                            groupedContributions[purpose] = [];
-                        }
-                        const member = Object.values(members).find(m => m.phone === c.phone) || { fullName: 'Unknown' };
-                        groupedContributions[purpose].push({
-                            ...c,
-                            fullName: member.fullName,
-                            id
-                        });
-                    });
-
-                    let html = '';
-                    Object.entries(groupedContributions).forEach(([purpose, contribs]) => {
-                        html += `<h4>Mchango: ${purpose}</h4><ul>`;
-                        contribs.forEach(c => {
-                            html += `<li>${c.fullName} - TSh ${c.amount} - ${new Date(c.timestamp).toLocaleString()}</li>`;
-                        });
-                        html += '</ul>';
-                    });
-
-                    document.getElementById('emergencyHistory').innerHTML = html || '<p>Hakuna michango ya dharura bado.</p>';
-                    checkEmergencyDeadline(); // Update 7: Check deadline
-                })
-                .catch(err => console.error('Load Emergency History Error:', err));
-        }
-
-        // Update 7: Set emergency contribution deadline
-        function setEmergencyDeadline() {
-            const name = document.getElementById('emergencyName').value;
-            const deadline = document.getElementById('emergencyDeadline').value;
-            if (!name || !deadline) return showModal('Hitilafu', 'Ingiza jina la mchango na tarehe ya mwisho!', 'error');
-            database.ref('emergencySettings').set({
-                name,
-                deadline,
-                timestamp: Date.now()
-            })
-                .then(() => {
-                    showModal('Mafanikio', 'Muda wa mchango wa dharura umewekwa!', 'success');
-                    document.getElementById('emergencyName').value = '';
-                    document.getElementById('emergencyDeadline').value = '';
-                    checkEmergencyDeadline();
-                });
-        }
-
-        // Update 7: Extend emergency contribution deadline
-        function extendEmergencyDeadline() {
-            database.ref('emergencySettings').once('value')
-                .then(snap => {
-                    const settings = snap.val() || {};
-                    if (!settings.deadline) return showModal('Hitilafu', 'Hakuna mchango wa dharura uliowekwa!', 'error');
-                    const currentDeadline = new Date(settings.deadline);
-                    const newDeadline = new Date(currentDeadline.getTime() + 24 * 60 * 60 * 1000); // Extend by 1 day
-                    database.ref('emergencySettings').update({
-                        deadline: newDeadline.toISOString(),
-                        timestamp: Date.now()
-                    })
-                        .then(() => {
-                            showModal('Mafanikio', 'Muda wa mchango wa dharura umeongezwa!', 'success');
-                            checkEmergencyDeadline();
-                        });
-                });
-        }
-
-        // Update 7: Check emergency contribution deadline
-        function checkEmergencyDeadline() {
-            database.ref('emergencySettings').once('value')
-                .then(snap => {
-                    const settings = snap.val() || {};
-                    const formSection = document.getElementById('emergencyFormSection');
-                    if (settings.deadline && new Date(settings.deadline) < new Date()) {
-                        formSection.innerHTML = '<p>Muda wa mchango wa dharura umeisha!</p>';
-                    } else {
-                        formSection.innerHTML = `
-                            <form id="emergencyForm" class="emergency-form">
-                                <div class="form-group">
-                                    <label>Jina la Mwanachama</label>
-                                    <select id="emergencyMember" required>
-                                        <option value="">Chagua Mwanachama</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Kiasi (TSh)</label>
-                                    <input type="number" id="emergencyAmount" min="1" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Maelezo (Pesa ya Nini)</label>
-                                    <input type="text" id="emergencyPurpose" required>
-                                </div>
-                                <button type="submit" class="btn btn-success">Tuma Mchango</button>
-                            </form>
-                        `;
-                        loadEmergencyMembers();
-                        document.getElementById('emergencyForm').addEventListener('submit', function (e) {
-                            e.preventDefault();
-                            const data = {
-                                phone: document.getElementById('emergencyMember').value,
-                                amount: document.getElementById('emergencyAmount').value,
-                                purpose: document.getElementById('emergencyPurpose').value,
-                                timestamp: Date.now()
-                            };
-                            saveEmergencyContribution(data);
-                        });
-                    }
+                .catch(err => {
+                    console.error('Generate Finance Report Error:', err);
+                    showModal('Hitilafu', 'Tatizo la kuunda ripoti: ' + err.message, 'error');
                 });
         }
 
@@ -1825,40 +1610,54 @@
                     const member = Object.values(memberSnap.val() || {})[0];
                     const payments = paymentsSnap.val() || {};
                     const confirmedPayments = Object.values(payments).filter(p => p.status === 'confirmed');
-                    let report = `<h3>${member.fullName}</h3><h4>Michango Iliyolipwa</h4><ul>`;
+
+                    const doc = new jsPDF();
+                    doc.setFontSize(16);
+                    doc.text(`Taarifa Binafsi: ${member.fullName}`, 10, 10);
+                    doc.setFontSize(12);
+                    doc.text(`Namba ya Simu: ${member.phone}`, 10, 20);
+                    doc.text(`Mtaa: ${member.address}`, 10, 30);
+                    let y = 40;
+
+                    doc.text('Michango Iliyolipwa', 10, y);
+                    y += 10;
                     confirmedPayments.forEach(p => {
-                        report += `<li>${p.paymentType} - TSh ${p.paymentAmount} (${p.paymentMonth || p.paymentDate})</li>`;
+                        doc.text(`${p.paymentType} - TSh ${p.paymentAmount} (${p.paymentMonth || p.paymentDate})`, 10, y);
+                        y += 10;
                     });
-                    report += '</ul>';
 
                     const paidMonths = new Set(confirmedPayments.filter(p => p.paymentType === 'Ada').map(p => p.paymentMonth));
                     const entryPayments = confirmedPayments.filter(p => p.paymentType === 'Hela ya Kiingilio');
                     const totalEntryPaid = entryPayments.reduce((sum, p) => sum + Number(p.paymentAmount), 0);
                     let debt = 0;
-                    let pending = '<h4>Michango Inayodaiwa</h4><ul>';
+                    y += 10;
+                    doc.text('Michango Inayodaiwa', 10, y);
+                    y += 10;
                     for (let i = 0; i <= CURRENT_MONTH_INDEX; i++) {
                         if (!paidMonths.has(MONTHS[i])) {
-                            pending += `<li>Ada ya ${MONTHS[i]} - TSh ${MONTHLY_FEE}</li>`;
+                            doc.text(`Ada ya ${MONTHS[i]} - TSh ${MONTHLY_FEE}`, 10, y);
                             debt += MONTHLY_FEE;
+                            y += 10;
                         }
                     }
                     if (totalEntryPaid < ENTRY_FEE) {
                         const entryDebt = ENTRY_FEE - totalEntryPaid;
-                        pending += `<li>Hela ya Kiingilio - TSh ${entryDebt}</li>`;
+                        doc.text(`Hela ya Kiingilio - TSh ${entryDebt}`, 10, y);
                         debt += entryDebt;
+                        y += 10;
                     }
-                    pending += '</ul>';
-                    report += pending + `<p><strong>Jumla ya Madeni: TSh ${debt}</strong></p>`;
-                    const printWindow = window.open('', '_blank');
-                    printWindow.document.write(`<html><head><title>Taarifa Binafsi</title></head><body>${report}</body></html>`);
-                    printWindow.document.close();
-                    printWindow.print();
+
+                    doc.text(`Jumla ya Madeni: TSh ${debt}`, 10, y);
+                    doc.save(`Taarifa_${member.fullName}_${new Date().getTime()}.pdf`);
+                })
+                .catch(err => {
+                    console.error('Print Personal Report Error:', err);
+                    showModal('Hitilafu', 'Tatizo la kuchapisha: ' + err.message, 'error');
                 });
         }
 
         function printDebtors() {
-            const month = document.getElementById('debtMonth').value;
-            if (!month) return showModal('Hitilafu', 'Chagua mwezi kwanza!', 'error');
+            const month = document.getElementById('debtMonth').value || MONTHS[CURRENT_MONTH_INDEX];
             Promise.all([
                 database.ref('members').once('value'),
                 database.ref('payments').orderByChild('paymentMonth').equalTo(month).once('value')
@@ -1867,25 +1666,43 @@
                     const members = membersSnap.val() || {};
                     const payments = paymentsSnap.val() || {};
                     const paidPhones = new Set(Object.values(payments).filter(p => p.status === 'confirmed').map(p => p.paymentPhone));
-                    let report = `<h3>Hali ya Malipo - ${month}</h3><h4>Waliolipa</h4><ul>`;
+
+                    const doc = new jsPDF();
+                    doc.setFontSize(16);
+                    doc.text(`Hali ya Malipo - ${month}`, 10, 10);
+                    doc.setFontSize(12);
+                    let y = 20;
+
+                    doc.text('Waliolipa', 10, y);
+                    y += 10;
                     Object.values(members).forEach(m => {
-                        if (paidPhones.has(m.phone)) report += `<li>${m.fullName}</li>`;
+                        if (paidPhones.has(m.phone)) {
+                            doc.text(`${m.fullName} - Amelipa`, 10, y);
+                            y += 10;
+                        }
                     });
-                    report += '</ul><h4>Waliobaki</h4><ul>';
+
+                    y += 10;
+                    doc.text('Waliobaki', 10, y);
+                    y += 10;
                     Object.values(members).forEach(m => {
-                        if (!paidPhones.has(m.phone)) report += `<li>${m.fullName}</li>`;
+                        if (!paidPhones.has(m.phone)) {
+                            doc.text(`${m.fullName} - Hajalipa`, 10, y);
+                            y += 10;
+                        }
                     });
-                    report += '</ul>';
-                    const printWindow = window.open('', '_blank');
-                    printWindow.document.write(`<html><head><title>Hali ya Malipo</title></head><body>${report}</body></html>`);
-                    printWindow.document.close();
-                    printWindow.print();
+
+                    doc.save(`Hali_Malipo_${month}_${new Date().getTime()}.pdf`);
+                })
+                .catch(err => {
+                    console.error('Print Debtors Error:', err);
+                    showModal('Hitilafu', 'Tatizo la kuchapisha: ' + err.message, 'error');
                 });
         }
 
         function printContributions() {
             const type = document.getElementById('contributionType').value;
-            if (!type) return showModal('Hitilafu', 'Chagua aina kwanza!', 'error');
+            if (!type) return showModal('Hitilafu', 'Chagua aina ya mchango kwanza!', 'error');
             Promise.all([
                 database.ref('members').once('value'),
                 database.ref('payments').orderByChild('paymentType').equalTo(type).once('value')
@@ -1894,54 +1711,38 @@
                     const members = membersSnap.val() || {};
                     const payments = paymentsSnap.val() || {};
                     const paidPhones = new Set(Object.values(payments).filter(p => p.status === 'confirmed').map(p => p.paymentPhone));
-                    let report = `<h3>Michango ya ${type}</h3><h4>Waliotoa</h4><ul>`;
+
+                    const doc = new jsPDF();
+                    doc.setFontSize(16);
+                    doc.text(`Michango - ${type}`, 10, 10);
+                    doc.setFontSize(12);
+                    let y = 20;
+
+                    doc.text('Waliotoa', 10, y);
+                    y += 10;
                     Object.values(members).forEach(m => {
                         if (paidPhones.has(m.phone)) {
                             const payment = Object.values(payments).find(p => p.paymentPhone === m.phone);
-                            report += `<li>${m.fullName} - TSh ${payment.paymentAmount} (${payment.paymentMonth || payment.paymentDate})</li>`;
+                            doc.text(`${m.fullName} - TSh ${payment.paymentAmount} (${payment.paymentMonth || payment.paymentDate})`, 10, y);
+                            y += 10;
                         }
                     });
-                    report += '</ul><h4>Waliobaki</h4><ul>';
+
+                    y += 10;
+                    doc.text('Waliobaki', 10, y);
+                    y += 10;
                     Object.values(members).forEach(m => {
-                        if (!paidPhones.has(m.phone)) report += `<li>${m.fullName}</li>`;
+                        if (!paidPhones.has(m.phone)) {
+                            doc.text(`${m.fullName} - Hajatoa`, 10, y);
+                            y += 10;
+                        }
                     });
-                    report += '</ul>';
-                    const printWindow = window.open('', '_blank');
-                    printWindow.document.write(`<html><head><title>Michango ya ${type}</title></head><body>${report}</body></html>`);
-                    printWindow.document.close();
-                    printWindow.print();
+
+                    doc.save(`Michango_${type}_${new Date().getTime()}.pdf`);
                 })
                 .catch(err => {
                     console.error('Print Contributions Error:', err);
-                    showModal('Hitilafu', 'Tatizo la kuchapisha michango: ' + err.message, 'error');
-                });
-        }
-
-        function printFinance() {
-            Promise.all([
-                database.ref('payments').once('value'),
-                database.ref('finance').once('value')
-            ])
-                .then(([paymentsSnap, financeSnap]) => {
-                    const payments = paymentsSnap.val() || {};
-                    const finance = financeSnap.val() || {};
-                    const totalIncome = Object.values(payments).filter(p => p.status === 'confirmed').reduce((sum, p) => sum + Number(p.paymentAmount), 0) +
-                        Object.values(finance).filter(f => f.type === 'income').reduce((sum, i) => sum + Number(i.amount), 0);
-                    const totalExpenses = Object.values(finance).filter(f => f.type === 'expense').reduce((sum, e) => sum + Number(e.amount), 0);
-                    let report = `<h3>Ripoti ya Mapato na Matumizi</h3><p>Mapato: TSh ${totalIncome}</p><p>Matumizi: TSh ${totalExpenses}</p><p>Salio: TSh ${totalIncome - totalExpenses}</p>`;
-                    report += '<h4>Historia</h4><ul>';
-                    Object.values(finance).sort((a, b) => b.timestamp - a.timestamp).forEach(f => {
-                        report += `<li>${f.type === 'income' ? 'Mapato' : 'Matumizi'} - TSh ${f.amount} (${f.description}) - ${new Date(f.timestamp).toLocaleString()}</li>`;
-                    });
-                    report += '</ul>';
-                    const printWindow = window.open('', '_blank');
-                    printWindow.document.write(`<html><head><title>Ripoti ya Fedha</title></head><body>${report}</body></html>`);
-                    printWindow.document.close();
-                    printWindow.print();
-                })
-                .catch(err => {
-                    console.error('Print Finance Error:', err);
-                    showModal('Hitilafu', 'Tatizo la kuchapisha ripoti ya fedha: ' + err.message, 'error');
+                    showModal('Hitilafu', 'Tatizo la kuchapisha: ' + err.message, 'error');
                 });
         }
 
@@ -1954,45 +1755,335 @@
                     const members = membersSnap.val() || {};
                     const payments = paymentsSnap.val() || {};
                     const paidPhones = new Set(Object.values(payments).filter(p => p.status === 'confirmed').map(p => p.paymentPhone));
-                    let report = `<h3>Wanachama Wasiotoa Michango</h3><ul>`;
+
+                    const doc = new jsPDF();
+                    doc.setFontSize(16);
+                    doc.text('Wanachama Wasiotoa Michango', 10, 10);
+                    doc.setFontSize(12);
+                    let y = 20;
+
                     Object.values(members).forEach(m => {
                         if (!paidPhones.has(m.phone)) {
-                            report += `<li>${m.fullName} - ${m.phone}</li>`;
+                            doc.text(`${m.fullName} - ${m.phone}`, 10, y);
+                            y += 10;
                         }
                     });
-                    report += '</ul>';
-                    if (!report.includes('<li>')) report = '<h3>Wanachama Wasiotoa Michango</h3><p>Hakuna wanachama wasiotoa michango.</p>';
-                    const printWindow = window.open('', '_blank');
-                    printWindow.document.write(`<html><head><title>Wasiotoa Michango</title></head><body>${report}</body></html>`);
-                    printWindow.document.close();
-                    printWindow.print();
+
+                    doc.save(`Wasiotoa_Michango_${new Date().getTime()}.pdf`);
                 })
                 .catch(err => {
                     console.error('Print Non-Contributors Error:', err);
-                    showModal('Hitilafu', 'Tatizo la kuchapisha orodha ya wasiotoa michango: ' + err.message, 'error');
+                    showModal('Hitilafu', 'Tatizo la kuchapisha: ' + err.message, 'error');
                 });
         }
 
-        // Initialize page
-        window.onload = function () {
-            setTimeout(() => {
-                document.getElementById('loadingScreen').style.display = 'none';
-                document.querySelector('.container').style.display = 'block';
-            }, 3000); // 3-second loading screen
+        function loginAdmin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === CONSTANT_PASSWORD || password === customAdminPassword) {
+                document.getElementById('adminLoginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadPendingPayments();
+                loadAnnouncements();
+            } else {
+                showModal('Hitilafu', 'Neno la siri si sahihi!', 'error');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('adminLoginForm').style.display = 'block';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function loadPendingPayments() {
+            database.ref('payments').orderByChild('status').equalTo('pending').once('value')
+                .then(snap => {
+                    const payments = snap.val() || {};
+                    let table = '<table class="table"><tr><th>Jina</th><th>Aina</th><th>Kiasi</th><th>Tarehe</th><th>Chaguzi</th></tr>';
+                    Promise.all(
+                        Object.entries(payments).map(([id, p]) =>
+                            database.ref('members').orderByChild('phone').equalTo(p.paymentPhone).once('value')
+                                .then(memberSnap => {
+                                    const member = Object.values(memberSnap.val() || {})[0] || {};
+                                    return { id, p, member };
+                                })
+                        )
+                    ).then(results => {
+                        results.forEach(({ id, p, member }) => {
+                            table += `<tr>
+                                <td>${member.fullName || p.paymentPhone}</td>
+                                <td>${p.paymentType}</td>
+                                <td>TSh ${p.paymentAmount}</td>
+                                <td>${p.paymentMonth || p.paymentDate}</td>
+                                <td>
+                                    <button class="btn btn-success" onclick="confirmPayment('${id}')">Thibitisha</button>
+                                    <button class="btn btn-danger" onclick="rejectPayment('${id}')">Kataa</button>
+                                </td>
+                            </tr>`;
+                        });
+                        table += '</table>';
+                        document.getElementById('pendingPaymentsTable').innerHTML = table;
+                    });
+                })
+                .catch(err => console.error('Load Pending Payments Error:', err));
+        }
+
+        function confirmPayment(paymentId) {
+            database.ref('payments').child(paymentId).update({ status: 'confirmed' })
+                .then(() => {
+                    showModal('Mafanikio', 'Malipo yamethibitishwa!', 'success');
+                    loadPendingPayments();
+                    loadNonContributors();
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kuthibitisha: ' + err.message, 'error'));
+        }
+
+        function rejectPayment(paymentId) {
+            database.ref('payments').child(paymentId).remove()
+                .then(() => {
+                    showModal('Mafanikio', 'Malipo yamekataliwa!', 'success');
+                    loadPendingPayments();
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kukataa: ' + err.message, 'error'));
+        }
+
+        function postAnnouncement() {
+            const text = document.getElementById('announcementTextInput').value;
+            if (!text) return showModal('Hitilafu', 'Ingiza tangazo kwanza!', 'error');
+            const announcement = {
+                text,
+                timestamp: Date.now(),
+                postedBy: 'Admin'
+            };
+            database.ref('announcements').push(announcement)
+                .then(() => {
+                    document.getElementById('announcementTextInput').value = '';
+                    loadAnnouncements();
+                    showModal('Mafanikio', 'Tangazo limechapishwa!', 'success');
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kutangaza: ' + err.message, 'error'));
+        }
+
+        function loadAnnouncements() {
+            database.ref('announcements').once('value')
+                .then(snap => {
+                    const announcements = snap.val() || {};
+                    let list = '<h3>Tangazo</h3><ul>';
+                    Object.entries(announcements).sort((a, b) => b[1].timestamp - a[1].timestamp).forEach(([id, a]) => {
+                        list += `<li>${a.text} (${new Date(a.timestamp).toLocaleString()}) <button class="btn btn-danger" onclick="deleteAnnouncement('${id}')">Futa</button></li>`;
+                    });
+                    list += '</ul>';
+                    document.getElementById('announcementsList').innerHTML = list;
+                    document.getElementById('announcementText').textContent = Object.values(announcements).sort((a, b) => b.timestamp - a.timestamp)[0]?.text || 'Hakuna tangazo jipya.';
+                })
+                .catch(err => console.error('Load Announcements Error:', err));
+        }
+
+        function deleteAnnouncement(id) {
+            database.ref('announcements').child(id).remove()
+                .then(() => {
+                    showModal('Mafanikio', 'Tangazo limefutwa!', 'success');
+                    loadAnnouncements();
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kufuta: ' + err.message, 'error'));
+        }
+
+        function addLeader() {
+            const name = document.getElementById('leaderName').value;
+            const position = document.getElementById('leaderPosition').value;
+            if (!name || !position) return showModal('Hitilafu', 'Ingiza jina na cheo!', 'error');
+            const leader = { name, position };
+            database.ref('leaders').push(leader)
+                .then(() => {
+                    document.getElementById('leaderName').value = '';
+                    document.getElementById('leaderPosition').value = '';
+                    loadLeaders();
+                    showModal('Mafanikio', 'Kiongozi ameongezwa!', 'success');
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kuongeza kiongozi: ' + err.message, 'error'));
+        }
+
+        function loadLeaders() {
+            database.ref('leaders').once('value')
+                .then(snap => {
+                    const leaders = snap.val() || {};
+                    const list = Object.entries(leaders).map(([id, l]) => `
+                        <div class="leader-item">
+                            <span class="leader-icon">👑</span>
+                            <div>
+                                <span class="leader-name">${l.name}</span> - 
+                                <span class="leader-position">${l.position}</span>
+                                <button class="btn btn-danger" onclick="deleteLeader('${id}')">Futa</button>
+                            </div>
+                        </div>
+                    `).join('');
+                    document.getElementById('leadersList').innerHTML = list || '<p>Hakuna viongozi waliorekodiwa.</p>';
+                })
+                .catch(err => {
+                    console.error('Load Leaders Error:', err);
+                    document.getElementById('leadersList').innerHTML = '<p>Hakuna data au hitilafu imetokea.</p>';
+                });
+        }
+
+        function deleteLeader(id) {
+            database.ref('leaders').child(id).remove()
+                .then(() => {
+                    showModal('Mafanikio', 'Kiongozi amefutwa!', 'success');
+                    loadLeaders();
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kufuta kiongozi: ' + err.message, 'error'));
+        }
+
+        function toggleNonContributors() {
+            const tab = document.getElementById('nonContributorsTab');
+            tab.style.display = tab.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function saveEmergencyContribution() {
+            const phone = document.getElementById('emergencyMember').value;
+            const amount = document.getElementById('emergencyAmount').value;
+            const purpose = document.getElementById('emergencyPurpose').value;
+            if (!phone || !amount || !purpose) {
+                showModal('Hitilafu', 'Jaza maelezo yote ya mchango wa dharura!', 'error');
+                return;
+            }
+            const data = {
+                paymentPhone: phone,
+                paymentAmount: Number(amount),
+                purpose,
+                timestamp: Date.now(),
+                status: 'pending'
+            };
+            database.ref('emergencyContributions').push(data)
+                .then(() => {
+                    showModal('Mafanikio', 'Mchango wa dharura umetumwa! Unasubiri uthibitisho.', 'success');
+                    document.getElementById('emergencyForm').reset();
+                    loadEmergencyHistory();
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kutuma mchango: ' + err.message, 'error'));
+        }
+
+        function loadEmergencyHistory() {
+            Promise.all([
+                database.ref('emergencyContributions').once('value'),
+                database.ref('members').once('value')
+            ])
+                .then(([contributionsSnap, membersSnap]) => {
+                    const contributions = contributionsSnap.val() || {};
+                    const members = membersSnap.val() || {};
+                    let history = '<h4>Historia ya Michango ya Dharura</h4><ul>';
+                    Object.values(contributions).sort((a, b) => b.timestamp - a.timestamp).forEach(c => {
+                        const member = Object.values(members).find(m => m.phone === c.paymentPhone) || {};
+                        history += `<li>${member.fullName || c.paymentPhone} - TSh ${c.paymentAmount} (${c.purpose}) - ${new Date(c.timestamp).toLocaleString()} [${c.status}]</li>`;
+                    });
+                    history += '</ul>';
+                    document.getElementById('emergencyHistory').innerHTML = history;
+                })
+                .catch(err => {
+                    console.error('Load Emergency History Error:', err);
+                    document.getElementById('emergencyHistory').innerHTML = '<p>Hakuna data au hitilafu imetokea.</p>';
+                });
+        }
+
+        function setEmergencyDeadline() {
+            const name = document.getElementById('emergencyName').value;
+            const deadline = document.getElementById('emergencyDeadline').value;
+            if (!name || !deadline) return showModal('Hitilafu', 'Ingiza jina la mchango na tarehe ya mwisho!', 'error');
+            const deadlineData = {
+                name,
+                deadline: new Date(deadline).getTime(),
+                timestamp: Date.now()
+            };
+            database.ref('emergencyDeadlines').push(deadlineData)
+                .then(() => {
+                    showModal('Mafanikio', 'Muda wa mchango wa dharura umewekwa!', 'success');
+                    document.getElementById('emergencyName').value = '';
+                    document.getElementById('emergencyDeadline').value = '';
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kuweka muda: ' + err.message, 'error'));
+        }
+
+        function extendEmergencyDeadline() {
+            const name = document.getElementById('emergencyName').value;
+            const deadline = document.getElementById('emergencyDeadline').value;
+            if (!name || !deadline) return showModal('Hitilafu', 'Ingiza jina la mchango na tarehe mpya!', 'error');
+            database.ref('emergencyDeadlines').orderByChild('name').equalTo(name).once('value')
+                .then(snap => {
+                    const deadlines = snap.val() || {};
+                    const latest = Object.entries(deadlines).sort((a, b) => b[1].timestamp - a[1].timestamp)[0];
+                    if (!latest) return showModal('Hitilafu', 'Hakuna mchango wa dharura uliopatikana!', 'error');
+                    database.ref('emergencyDeadlines').child(latest[0]).update({
+                        deadline: new Date(deadline).getTime(),
+                        timestamp: Date.now()
+                    })
+                        .then(() => {
+                            showModal('Mafanikio', 'Muda wa mchango wa dharura umeongezwa!', 'success');
+                            document.getElementById('emergencyName').value = '';
+                            document.getElementById('emergencyDeadline').value = '';
+                        });
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kuongeza muda: ' + err.message, 'error'));
+        }
+
+        function saveComment() {
+            const name = document.getElementById('commentName').value;
+            const text = document.getElementById('commentText').value;
+            if (!name || !text) return showModal('Hitilafu', 'Ingiza jina na maoni!', 'error');
+            const comment = {
+                name,
+                text,
+                timestamp: Date.now()
+            };
+            database.ref('comments').push(comment)
+                .then(() => {
+                    showModal('Mafanikio', 'Maoni yametumwa!', 'success');
+                    document.getElementById('commentForm').reset();
+                    loadComments();
+                })
+                .catch(err => showModal('Hitilafu', 'Tatizo la kutuma maoni: ' + err.message, 'error'));
+        }
+
+        function loadComments() {
+            database.ref('comments').once('value')
+                .then(snap => {
+                    const comments = snap.val() || {};
+                    let list = '<h3>Maoni</h3><ul>';
+                    Object.values(comments).sort((a, b) => b.timestamp - a.timestamp).forEach(c => {
+                        list += `<li><strong>${c.name}</strong>: ${c.text} (${new Date(c.timestamp).toLocaleString()})</li>`;
+                    });
+                    list += '</ul>';
+                    document.getElementById('commentsList').innerHTML = list;
+                })
+                .catch(err => console.error('Load Comments Error:', err));
+        }
+
+        function updateUserCount() {
+            database.ref('dailyUsers').once('value')
+                .then(snap => {
+                    let count = snap.val();
+                    count = Number.isInteger(count) ? count : 0;
+                    count++;
+                    database.ref('dailyUsers').set(count)
+                        .then(() => {
+                            document.getElementById('userCount').textContent = count;
+                        });
+                })
+                .catch(err => console.error('Update User Count Error:', err));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
             loadMembers();
             loadMembersAlphabetically();
+            loadNonContributors();
+            loadFinance();
+            loadLeaders();
+            loadEmergencyHistory();
             loadAnnouncements();
             loadComments();
-            loadLeaders();
-            loadFinance();
-            loadNonContributors();
-            loadEmergencyHistory(); // Update 6: Load emergency history
-            checkEmergencyDeadline(); // Update 7: Check deadline
-            trackDailyUser();
-        };
+            updateUserCount();
+        });
 
-        // Form submissions
-        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+        document.getElementById('registrationForm').addEventListener('submit', e => {
             e.preventDefault();
             const data = {
                 fullName: document.getElementById('fullName').value,
@@ -2003,12 +2094,12 @@
             saveRegistration(data);
         });
 
-        document.getElementById('paymentForm').addEventListener('submit', function (e) {
+        document.getElementById('paymentForm').addEventListener('submit', e => {
             e.preventDefault();
             const paymentType = document.getElementById('paymentType').value;
             const data = {
                 paymentPhone: document.getElementById('paymentMember').value,
-                paymentType: paymentType,
+                paymentType,
                 paymentAmount: document.getElementById('paymentAmount').value,
                 status: 'pending',
                 timestamp: Date.now()
@@ -2021,14 +2112,14 @@
             savePayment(data);
         });
 
-        document.getElementById('commentForm').addEventListener('submit', function (e) {
+        document.getElementById('commentForm').addEventListener('submit', e => {
             e.preventDefault();
-            const data = {
-                name: document.getElementById('commentName').value,
-                text: document.getElementById('commentText').value,
-                timestamp: Date.now()
-            };
-            saveComment(data);
+            saveComment();
+        });
+
+        document.getElementById('emergencyForm').addEventListener('submit', e => {
+            e.preventDefault();
+            saveEmergencyContribution();
         });
     </script>
 </body>
